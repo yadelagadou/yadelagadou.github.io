@@ -11,9 +11,15 @@
         <h1>Mes Vidéos YouTube</h1>
     </header>
     <main>
+        <section class="search-container">
+            <input type="text" id="search-query" placeholder="Rechercher une vidéo..." />
+            <button onclick="searchVideos()">Rechercher</button>
+        </section>
         <section class="video-container">
             <h2>Vidéo Actuelle</h2>
-            <iframe id="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/VIDÉO_ID_1" frameborder="0" allowfullscreen></iframe>
+            <div class="video-wrapper">
+                <iframe id="youtube-video" src="https://www.youtube.com/embed/VIDÉO_ID_1" frameborder="0" allowfullscreen></iframe>
+            </div>
         </section>
     </main>
     <footer>
@@ -21,13 +27,11 @@
     </footer>
 
     <script>
-        // Exemple de script pour changer la vidéo
-        function changeVideo(videoId) {
-            document.getElementById('youtube-video').src = "https://www.youtube.com/embed/" + videoId;
+        function searchVideos() {
+            const query = document.getElementById('search-query').value;
+            const channelId = 'YOUR_CHANNEL_ID'; // Remplacez par l'ID de votre chaîne YouTube
+            window.location.href = `https://www.youtube.com/results?search_query=${query}&sp=EgIQAg%253D%253D`; // `EgIQAg%253D%253D` filtre pour les vidéos de la chaîne
         }
-
-        // Changer l'ID de la vidéo selon les besoins
-        // changeVideo("VIDÉO_ID_2"); // Décommentez cette ligne et remplacez VIDÉO_ID_2 par l'ID de la nouvelle vidéo
     </script>
 </body>
 </html>
