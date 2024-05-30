@@ -1,0 +1,7 @@
+[
+    { "id": "VIDÉO_ID_1", "title": "Titre de la vidéo 1" },
+    { "id": "VIDÉO_ID_2", "title": "Titre de la vidéo 2" },
+    { "id": "VIDÉO_ID_3", "title": "Titre de la vidéo 3" },
+    { "id": "VIDÉO_ID_4", "title": "Titre de la vidéo 4" }
+    // Ajoutez plus de vidéos ici
+]
