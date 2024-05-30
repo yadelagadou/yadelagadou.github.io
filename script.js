@@ -1,8 +1,10 @@
 let videos = [];
 
+// Fonction pour afficher toutes les vidéos
 function displayVideos() {
     const results = document.getElementById('search-results');
     results.innerHTML = '';
+    console.log('Displaying all videos:', videos);
 
     videos.forEach(video => {
         const videoItem = document.createElement('div');
@@ -16,20 +18,27 @@ function displayVideos() {
     });
 }
 
+// Charger les vidéos à partir du fichier JSON
 fetch('videos.json')
     .then(response => response.json())
     .then(data => {
         videos = data;
+        console.log('Videos loaded:', videos);
         displayVideos();
     })
     .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
 
+// Fonction de recherche de vidéos
 function searchVideos() {
     const query = document.getElementById('search-query').value.trim().toLowerCase();
+    console.log('Search query:', query);
+
     const results = document.getElementById('search-results');
     results.innerHTML = '';
 
     const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
+    console.log('Filtered videos:', filteredVideos);
+
     filteredVideos.forEach(video => {
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
