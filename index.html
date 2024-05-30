@@ -13,12 +13,27 @@
             flex-direction: column;
             align-items: center;
         }
-        .video-item {
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .video-list {
+            flex: 1;
+            margin-right: 20px;
+            max-width: 300px;
+        }
+        .video-list .video-item {
             cursor: pointer;
             margin: 10px 0;
         }
+        .video-player {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         #youtube-video {
-            margin: 20px 0;
             width: 100%;
             max-width: 560px;
             height: 315px;
@@ -28,8 +43,12 @@
 <body>
     <h1>Recherche de Vidéos YouTube</h1>
     <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
-    <div id="search-results"></div>
-    <iframe id="youtube-video" src="https://www.youtube.com/embed/AJZbd7PlTGo" frameborder="0" allowfullscreen></iframe>
+    <div class="container">
+        <div class="video-list" id="search-results"></div>
+        <div class="video-player">
+            <iframe id="youtube-video" src="https://www.youtube.com/embed/nMsJ0zgy_As" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
