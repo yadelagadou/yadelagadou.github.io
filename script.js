@@ -76,31 +76,29 @@ function exitFullScreen() {
     }
 }
 
-// Événements pour détecter le début et la fin de la vidéo
 document.getElementById('youtube-video').addEventListener('load', function () {
     const iframe = this;
-    iframe.contentWindow.addEventListener('message', function (event) {
-        if (event.data === "play") {
+    const player = iframe.contentWindow;
+
+    // Écouter les événements de la vidéo
+    player.addEventListener('message', function (event) {
+        const data = JSON.parse(event.data);
+        if (data.event === 'onStateChange' && data.info === 1) { // 1 signifie que la vidéo a commencé à jouer
             enterFullScreen(iframe);
-        } else if (event.data === "pause" || event.data === "ended") {
+        } else if (data.event === 'onStateChange' && (data.info === 0 || data.info === 2)) { // 0: vidéo terminée, 2: vidéo en pause
             exitFullScreen();
         }
     });
+
+    // Envoyer une demande de notification d'état à la vidéo
+    player.postMessage('{"event":"listening","id":1,"session":"CLIENT-NON_RELIÉ"}', '*');
 });
 
-// Ajouter des événements pour détecter quand la vidéo commence et s'arrête
-document.getElementById('youtube-video').addEventListener('load', function () {
-    const iframe = this;
-    iframe.contentWindow.addEventListener('play', function () {
-        iframe.classList.add('full-screen-video');
-        enterFullScreen(iframe);
-    });
-    iframe.contentWindow.addEventListener('pause', function () {
-        iframe.classList.remove('full-screen-video');
-        exitFullScreen();
-    });
-    iframe.contentWindow.addEventListener('ended', function () {
-        iframe.classList.remove('full-screen-video');
-        exitFullScreen();
-    });
+// Redimensionner l'iframe pour remplir l'écran
+window.addEventListener('resize', function () {
+    const iframe = document.getElementById('youtube-video');
+    if (iframe.classList.contains('full-screen-video')) {
+        iframe.style.width = window.innerWidth + 'px';
+        iframe.style.height = window.innerHeight + 'px';
+    }
 });
