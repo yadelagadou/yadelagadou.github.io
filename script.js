@@ -1,10 +1,16 @@
 let videos = [];
 
-// Fonction pour afficher toutes les vidéos
+fetch('videos.json')
+    .then(response => response.json())
+    .then(data => {
+        videos = data;
+        displayVideos();
+    })
+    .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
+
 function displayVideos() {
     const results = document.getElementById('search-results');
     results.innerHTML = '';
-    console.log('Displaying all videos:', videos);
 
     videos.forEach(video => {
         const videoItem = document.createElement('div');
@@ -12,71 +18,88 @@ function displayVideos() {
         videoItem.setAttribute('data-video-id', video.id);
         videoItem.innerHTML = `<h3>${video.title}</h3>`;
         videoItem.addEventListener('click', function() {
-            document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${video.id}`;
+            const iframe = document.getElementById('youtube-video');
+            iframe.src = `https://www.youtube.com/embed/${video.id}`;
+            iframe.classList.remove('full-screen-video');
         });
         results.appendChild(videoItem);
     });
 }
-
-// Charger les vidéos à partir du fichier JSON
-fetch('videos.json')
-    .then(response => response.json())
-    .then(data => {
-        videos = data;
-        console.log('Videos loaded:', videos);
-        displayVideos();
-    })
-    .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
-
-// Fonction de recherche de vidéos
 function searchVideos() {
     const query = document.getElementById('search-query').value.trim().toLowerCase();
-    console.log('Search query:', query);
-
     const results = document.getElementById('search-results');
     results.innerHTML = '';
 
     const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
-    console.log('Filtered videos:', filteredVideos);
-
     filteredVideos.forEach(video => {
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
         videoItem.setAttribute('data-video-id', video.id);
         videoItem.innerHTML = `<h3>${video.title}</h3>`;
         videoItem.addEventListener('click', function() {
-            document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${video.id}`;
+            const iframe = document.getElementById('youtube-video');
+            iframe.src = `https://www.youtube.com/embed/${video.id}`;
+            iframe.classList.remove('full-screen-video');
         });
         results.appendChild(videoItem);
     });
 
-    // Si aucune vidéo ne correspond à la recherche, afficher un message
     if (filteredVideos.length === 0) {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
-document.getElementById('youtube-video').addEventListener('load', function() {
-    const iframe = this.contentWindow;
-    iframe.postMessage('{"event":"command","func":"addEventListener","args":["onStateChange"]}', '*');
 
-    window.addEventListener('message', function(event) {
+// Fonction pour entrer en plein écran
+function enterFullScreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari et Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+    }
+}
+
+// Fonction pour sortir du plein écran
+function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari et Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+    }
+}
+
+document.getElementById('youtube-video').addEventListener('load', function () {
+    const iframe = this;
+    const player = iframe.contentWindow;
+
+    // Écouter les événements de la vidéo
+    player.addEventListener('message', function (event) {
         const data = JSON.parse(event.data);
-        if (data.event === 'onStateChange') {
-            if (data.info === 1) { // 1 is for PLAYING state
-                enterFullScreen();
-            } else if (data.info === 2 || data.info === 0) { // 2 is for PAUSED state, 0 is for ENDED state
-                exitFullScreen();
-            }
+        if (data.event === 'onStateChange' && data.info === 1) { // 1 signifie que la vidéo a commencé à jouer
+            enterFullScreen(iframe);
+        } else if (data.event === 'onStateChange' && (data.info === 0 || data.info === 2)) { // 0: vidéo terminée, 2: vidéo en pause
+            exitFullScreen();
         }
     });
+
+    // Envoyer une demande de notification d'état à la vidéo
+    player.postMessage('{"event":"listening","id":1,"session":"CLIENT-NON_RELIÉ"}', '*');
 });
 
-function enterFullScreen() {
+// Redimensionner l'iframe pour remplir l'écran
+window.addEventListener('resize', function () {
     const iframe = document.getElementById('youtube-video');
-    iframe.classList.add('full-screen-video');
-}
+    if (iframe.classList.contains('full-screen-video')) {
+        iframe.style.width = window.innerWidth + 'px';
+        iframe.style.height = window.innerHeight + 'px';
+    }
+});
 
-function exitFullScreen() {
-    const iframe = document.getElementById('youtube-video');
-    iframe.classList.remove('full-screen-video');
-}
+
