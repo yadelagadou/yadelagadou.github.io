@@ -22,14 +22,7 @@
             </div>
         </section>
         <section class="search-results" id="search-results">
-            <!-- Ajouter des vidéos ici -->
-            <div class="video-item" data-title="Video 1" data-video-id="VIDÉO_ID_1">
-                <h3>Video 1</h3>
-            </div>
-            <div class="video-item" data-title="Video 2" data-video-id="VIDÉO_ID_2">
-                <h3>Video 2</h3>
-            </div>
-            <!-- Ajoutez plus de vidéos ici -->
+            <!-- Les résultats de la recherche apparaîtront ici -->
         </section>
     </main>
     <footer>
@@ -37,25 +30,29 @@
     </footer>
 
     <script>
+        const videos = [
+            { id: 'VIDÉO_ID_1', title: 'Video 1' },
+            { id: 'VIDÉO_ID_2', title: 'Video 2' },
+            // Ajoutez plus de vidéos ici
+        ];
+
         function searchVideos() {
             const query = document.getElementById('search-query').value.toLowerCase();
-            const videos = document.querySelectorAll('.video-item');
-            videos.forEach(video => {
-                const title = video.getAttribute('data-title').toLowerCase();
-                if (title.includes(query)) {
-                    video.style.display = 'block';
-                } else {
-                    video.style.display = 'none';
-                }
+            const results = document.getElementById('search-results');
+            results.innerHTML = '';
+
+            const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
+            filteredVideos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.classList.add('video-item');
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.innerHTML = `<h3>${video.title}</h3>`;
+                videoItem.addEventListener('click', function() {
+                    document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${video.id}`;
+                });
+                results.appendChild(videoItem);
             });
         }
-
-        document.querySelectorAll('.video-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video-id');
-                document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${videoId}`;
-            });
-        });
     </script>
 </body>
 </html>
