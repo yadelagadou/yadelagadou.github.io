@@ -24,4 +24,8 @@ function searchVideos() {
         });
         results.appendChild(videoItem);
     });
+    // Si une seule vidéo est trouvée, mettez-la automatiquement en lecture
+    if (filteredVideos.length === 1) {
+        document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${filteredVideos[0].id}`;
+    }
 }
