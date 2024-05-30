@@ -12,20 +12,37 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            box-sizing: border-box;
         }
         .container {
             display: flex;
             width: 100%;
             max-width: 1200px;
+            height: 100%;
         }
         .video-list {
             flex: 1;
             margin-right: 20px;
             max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .video-list input {
+            margin: 20px 0;
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
         }
         .video-list .video-item {
             cursor: pointer;
             margin: 10px 0;
+            width: 100%;
+            text-align: center;
         }
         .video-player {
             flex: 2;
@@ -42,9 +59,11 @@
 </head>
 <body>
     <h1>Recherche de Vidéos YouTube</h1>
-    <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
     <div class="container">
-        <div class="video-list" id="search-results"></div>
+        <div class="video-list">
+            <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
+            <div id="search-results"></div>
+        </div>
         <div class="video-player">
             <iframe id="youtube-video" src="https://www.youtube.com/embed/nMsJ0zgy_As" frameborder="0" allowfullscreen></iframe>
         </div>
