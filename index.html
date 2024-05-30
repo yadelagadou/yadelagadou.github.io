@@ -18,8 +18,24 @@
         <section class="video-container">
             <h2>Vidéo Actuelle</h2>
             <div class="video-wrapper">
-                <iframe id="youtube-video" src="https://www.youtube.com/embed/WBTieWBLhZg" frameborder="0" allowfullscreen></iframe>
+                <iframe id="youtube-video" src="https://www.youtube.com/embed/VIDÉO_ID_1" frameborder="0" allowfullscreen></iframe>
             </div>
+        </section>
+        <section class="search-results" id="search-results">
+            <!-- Ajouter des vidéos ici -->
+            <div class="video-item" data-title="Video 1">
+                <h3>Video 1</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/VIDÉO_ID_1" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="video-item" data-title="Video 2">
+                <h3>Video 2</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/VIDÉO_ID_2" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Ajoutez plus de vidéos ici -->
         </section>
     </main>
     <footer>
@@ -28,9 +44,16 @@
 
     <script>
         function searchVideos() {
-            const query = document.getElementById('search-query').value;
-            const channelId = 'UCc34U2mPCondPLKXtT1VGjg'; // Remplacez par l'ID de votre chaîne YouTube
-            window.location.href = `https://www.youtube.com/results?search_query=${query}&sp=EgIQAg%253D%253D`; // `EgIQAg%253D%253D` filtre pour les vidéos de la chaîne
+            const query = document.getElementById('search-query').value.toLowerCase();
+            const videos = document.querySelectorAll('.video-item');
+            videos.forEach(video => {
+                const title = video.getAttribute('data-title').toLowerCase();
+                if (title.includes(query)) {
+                    video.style.display = 'block';
+                } else {
+                    video.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
