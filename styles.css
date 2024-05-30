@@ -83,6 +83,7 @@ main {
     color: #000;
     padding: 10px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .video-item h3 {
