@@ -48,7 +48,17 @@ function searchVideos() {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
+// Mettre la vidéo en plein écran lors du clic
+document.getElementById('youtube-video').addEventListener('click', function () {
+    const iframe = this;
+    iframe.classList.toggle('full-screen-video');
+});
 
+// Écouter les événements de fin de lecture pour sortir du mode plein écran
+document.getElementById('youtube-video').addEventListener('ended', function () {
+    const iframe = this;
+    iframe.classList.remove('full-screen-video');
+});
 // Fonction pour entrer en plein écran
 function enterFullScreen(element) {
     if (element.requestFullscreen) {
