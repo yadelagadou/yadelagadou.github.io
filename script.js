@@ -50,45 +50,57 @@ function searchVideos() {
     }
 }
 
-// Detect play and end events by monitoring the iframe's URL changes
-const iframe = document.getElementById('youtube-video');
-iframe.addEventListener('load', function() {
-    setInterval(checkIframeSrc, 1000);
-});
-
-function checkIframeSrc() {
-    const iframe = document.getElementById('youtube-video');
-    const iframeSrc = iframe.src;
-
-    // Assuming the URL structure contains 'start' when video is playing
-    if (iframeSrc.includes('&autoplay=1')) {
-        enterFullScreen();
-    } else {
-        exitFullScreen();
+// Fonction pour entrer en plein écran
+function enterFullScreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari et Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
     }
 }
 
-function enterFullScreen() {
-    const iframe = document.getElementById('youtube-video');
-    if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-    } else if (iframe.mozRequestFullScreen) { // Firefox
-        iframe.mozRequestFullScreen();
-    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        iframe.webkitRequestFullscreen();
-    } else if (iframe.msRequestFullscreen) { // IE/Edge
-        iframe.msRequestFullscreen();
-    }
-}
-
+// Fonction pour sortir du plein écran
 function exitFullScreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.mozCancelFullScreen) { // Firefox
         document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari et Opera
         document.webkitExitFullscreen();
     } else if (document.msExitFullscreen) { // IE/Edge
         document.msExitFullscreen();
     }
 }
+
+// Événements pour détecter le début et la fin de la vidéo
+document.getElementById('youtube-video').addEventListener('load', function () {
+    const iframe = this;
+    iframe.contentWindow.addEventListener('message', function (event) {
+        if (event.data === "play") {
+            enterFullScreen(iframe);
+        } else if (event.data === "pause" || event.data === "ended") {
+            exitFullScreen();
+        }
+    });
+});
+
+// Ajouter des événements pour détecter quand la vidéo commence et s'arrête
+document.getElementById('youtube-video').addEventListener('load', function () {
+    const iframe = this;
+    iframe.contentWindow.addEventListener('play', function () {
+        iframe.classList.add('full-screen-video');
+        enterFullScreen(iframe);
+    });
+    iframe.contentWindow.addEventListener('pause', function () {
+        iframe.classList.remove('full-screen-video');
+        exitFullScreen();
+    });
+    iframe.contentWindow.addEventListener('ended', function () {
+        iframe.classList.remove('full-screen-video');
+        exitFullScreen();
+    });
+});
