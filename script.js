@@ -30,3 +30,18 @@ function searchVideos() {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
+function displayVideos() {
+    const results = document.getElementById('search-results');
+    results.innerHTML = '';
+
+    videos.forEach(video => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+        videoItem.setAttribute('data-video-id', video.id);
+        videoItem.innerHTML = `<h3>${video.title}</h3>`;
+        videoItem.addEventListener('click', function() {
+            document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${video.id}`;
+        });
+        results.appendChild(videoItem);
+    });
+}
