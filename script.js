@@ -50,6 +50,7 @@ function searchVideos() {
 
 // Mettre la vidéo en plein écran lors du clic
 document.getElementById('youtube-video').addEventListener('click', function () {
+    console.log("Clic sur la vidéo"); // Ajout du console.log pour le débogage
     const video = this;
     if (video.requestFullscreen) {
         video.requestFullscreen();
