@@ -3,5 +3,5 @@
     { "id": "AJZbd7PlTGo", "title": "Danger Fête Foraine à Caen" },
     { "id": "JzEMyDP0Y_w", "title": "Youki, a Surprising Dog" },
     { "id": "JlBEH58hPik", "title": "CAEN Easter Fair 2024" }
-    // Ajoutez plus de vidéos ici
+    // Ajoutez plus de vidéos ici, sans virgule après le dernier élément
 ]
