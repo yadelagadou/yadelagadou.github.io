@@ -19,7 +19,7 @@ function displayVideos() {
         videoItem.innerHTML = `<h3>${video.title}</h3>`;
         videoItem.addEventListener('click', function() {
             const iframe = document.getElementById('youtube-video');
-            iframe.src = `https://www.youtube.com/embed/${video.id}?enablejsapi=1`;
+            iframe.src = `https://www.youtube.com/embed/${video.id}`;
             iframe.classList.remove('full-screen-video');
         });
         results.appendChild(videoItem);
@@ -39,7 +39,7 @@ function searchVideos() {
         videoItem.innerHTML = `<h3>${video.title}</h3>`;
         videoItem.addEventListener('click', function() {
             const iframe = document.getElementById('youtube-video');
-            iframe.src = `https://www.youtube.com/embed/${video.id}?enablejsapi=1`;
+            iframe.src = `https://www.youtube.com/embed/${video.id}`;
             iframe.classList.remove('full-screen-video');
         });
         results.appendChild(videoItem);
@@ -50,31 +50,45 @@ function searchVideos() {
     }
 }
 
-// Add event listener to the iframe when it loads
-document.getElementById('youtube-video').addEventListener('load', function() {
-    const iframe = this.contentWindow;
-    iframe.postMessage('{"event":"command","func":"addEventListener","args":["onStateChange"]}', '*');
-
-    window.addEventListener('message', function(event) {
-        if (typeof event.data === 'string') {
-            const data = JSON.parse(event.data);
-            if (data.event === 'onStateChange') {
-                if (data.info === 1) { // 1 is for PLAYING state
-                    enterFullScreen();
-                } else if (data.info === 2 || data.info === 0) { // 2 is for PAUSED state, 0 is for ENDED state
-                    exitFullScreen();
-                }
-            }
-        }
-    });
+// Detect play and end events by monitoring the iframe's URL changes
+const iframe = document.getElementById('youtube-video');
+iframe.addEventListener('load', function() {
+    setInterval(checkIframeSrc, 1000);
 });
+
+function checkIframeSrc() {
+    const iframe = document.getElementById('youtube-video');
+    const iframeSrc = iframe.src;
+
+    // Assuming the URL structure contains 'start' when video is playing
+    if (iframeSrc.includes('&autoplay=1')) {
+        enterFullScreen();
+    } else {
+        exitFullScreen();
+    }
+}
 
 function enterFullScreen() {
     const iframe = document.getElementById('youtube-video');
-    iframe.classList.add('full-screen-video');
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
+    }
 }
 
 function exitFullScreen() {
-    const iframe = document.getElementById('youtube-video');
-    iframe.classList.remove('full-screen-video');
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+    }
 }
