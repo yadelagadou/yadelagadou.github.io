@@ -11,8 +11,10 @@ function displayVideos() {
         videoItem.classList.add('video-item');
         videoItem.setAttribute('data-video-id', video.id);
         videoItem.innerHTML = `<h3>${video.title}</h3>`;
-        videoItem.addEventListener('click', function() {
-            document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${video.id}`;
+videoItem.addEventListener('click', function() {
+            const iframe = document.getElementById('youtube-video');
+            iframe.src = `https://www.youtube.com/embed/${video.id}?enablejsapi=1`;
+            iframe.classList.remove('full-screen-video');
         });
         results.appendChild(videoItem);
     });
