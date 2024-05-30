@@ -55,3 +55,28 @@ function searchVideos() {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
+document.getElementById('youtube-video').addEventListener('load', function() {
+    const iframe = this.contentWindow;
+    iframe.postMessage('{"event":"command","func":"addEventListener","args":["onStateChange"]}', '*');
+
+    window.addEventListener('message', function(event) {
+        const data = JSON.parse(event.data);
+        if (data.event === 'onStateChange') {
+            if (data.info === 1) { // 1 is for PLAYING state
+                enterFullScreen();
+            } else if (data.info === 2 || data.info === 0) { // 2 is for PAUSED state, 0 is for ENDED state
+                exitFullScreen();
+            }
+        }
+    });
+});
+
+function enterFullScreen() {
+    const iframe = document.getElementById('youtube-video');
+    iframe.classList.add('full-screen-video');
+}
+
+function exitFullScreen() {
+    const iframe = document.getElementById('youtube-video');
+    iframe.classList.remove('full-screen-video');
+}
