@@ -9,7 +9,7 @@ fetch('videos.json')
     .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
 
 function searchVideos() {
-    const query = document.getElementById('search-query').value.toLowerCase();
+    const query = document.getElementById('search-query').value.trim().toLowerCase();
     const results = document.getElementById('search-results');
     results.innerHTML = '';
 
@@ -24,8 +24,9 @@ function searchVideos() {
         });
         results.appendChild(videoItem);
     });
-    // Si une seule vidéo est trouvée, mettez-la automatiquement en lecture
-    if (filteredVideos.length === 1) {
-        document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${filteredVideos[0].id}`;
+
+    // Si aucune vidéo ne correspond à la recherche, afficher un message
+    if (filteredVideos.length === 0) {
+        results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
