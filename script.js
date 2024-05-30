@@ -49,18 +49,16 @@ function searchVideos() {
 }
 
 // Mettre la vidéo en plein écran lors du clic sur l'iframe
-document.getElementById('youtube-video').addEventListener('click', function (event) {
-    if (event.detail === 2) { // Vérifie si le clic est un double-clic
-        const iframe = this;
-        if (iframe.requestFullscreen) {
-            iframe.requestFullscreen();
-        } else if (iframe.mozRequestFullScreen) { // Firefox
-            iframe.mozRequestFullScreen();
-        } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
-            iframe.webkitRequestFullscreen();
-        } else if (iframe.msRequestFullscreen) { // IE/Edge
-            iframe.msRequestFullscreen();
-        }
+document.getElementById('youtube-video').addEventListener('click', function () {
+    const iframe = this;
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
     }
 });
 
