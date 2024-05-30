@@ -19,6 +19,7 @@ header h1 {
 
 main {
     padding: 20px;
+    text-align: center;
 }
 
 .video-container {
@@ -30,10 +31,23 @@ main {
     margin-bottom: 10px;
 }
 
-iframe {
+/* Wrapper pour rendre la vidéo responsive et centrée */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin: 0 auto; /* Centre le wrapper */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 560px;
-    height: 315px;
+    height: 100%;
 }
 
 footer {
@@ -45,4 +59,5 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
 
