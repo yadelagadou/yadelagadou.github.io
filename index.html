@@ -23,17 +23,11 @@
         </section>
         <section class="search-results" id="search-results">
             <!-- Ajouter des vidéos ici -->
-            <div class="video-item" data-title="Video 1">
+            <div class="video-item" data-title="Video 1" data-video-id="VIDÉO_ID_1">
                 <h3>Video 1</h3>
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/VIDÉO_ID_1" frameborder="0" allowfullscreen></iframe>
-                </div>
             </div>
-            <div class="video-item" data-title="Video 2">
+            <div class="video-item" data-title="Video 2" data-video-id="VIDÉO_ID_2">
                 <h3>Video 2</h3>
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/VIDÉO_ID_2" frameborder="0" allowfullscreen></iframe>
-                </div>
             </div>
             <!-- Ajoutez plus de vidéos ici -->
         </section>
@@ -55,6 +49,14 @@
                 }
             });
         }
+
+        document.querySelectorAll('.video-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video-id');
+                document.getElementById('youtube-video').src = `https://www.youtube.com/embed/${videoId}`;
+            });
+        });
     </script>
 </body>
 </html>
+
