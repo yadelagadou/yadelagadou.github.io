@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Vidéos YouTube</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Recherche de Vidéos</title>
+    <style>
+        body {
+            background-color: blue;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .video-item {
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        #youtube-video {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Mes Vidéos YouTube</h1>
-    </header>
-    <main>
-        <section class="search-container">
-            <input type="text" id="search-query" placeholder="Rechercher une vidéo..." />
-            <button onclick="searchVideos()">Rechercher</button>
-        </section>
-        <section class="video-container">
-            <h2>Vidéo Actuelle</h2>
-            <div class="video-wrapper">
-                <iframe id="youtube-video" src="https://www.youtube.com/embed/JzEMyDP0Y_w" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </section>
-        <section class="search-results" id="search-results">
-            <!-- Les résultats de la recherche apparaîtront ici -->
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Mes Vidéos YouTube</p>
-    </footer>
+    <h1>Recherche de Vidéos YouTube</h1>
+    <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
+    <div id="search-results"></div>
+    <iframe id="youtube-video" src="https://www.youtube.com/embed/AJZbd7PlTGo" frameborder="0" allowfullscreen></iframe>
 
     <script src="script.js"></script>
 </body>
