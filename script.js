@@ -48,18 +48,18 @@ function searchVideos() {
     }
 }
 
-// Mettre la vidéo en plein écran lors du clic
+// Mettre la vidéo en plein écran lors du clic sur l'iframe
 document.getElementById('youtube-video').addEventListener('click', function () {
-    console.log("Clic sur la vidéo"); // Ajout du console.log pour le débogage
-    const video = this;
-    if (video.requestFullscreen) {
-        video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) { // Firefox
-        video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) { // Chrome, Safari et Opera
-        video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) { // IE/Edge
-        video.msRequestFullscreen();
+    console.log("Clic sur la vidéo");
+    const iframe = this;
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
     }
 });
 
@@ -68,6 +68,7 @@ document.getElementById('youtube-video').addEventListener('pause', exitFullScree
 document.getElementById('youtube-video').addEventListener('ended', exitFullScreen);
 
 function exitFullScreen() {
+    const iframe = document.getElementById('youtube-video');
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.mozCancelFullScreen) { // Firefox
