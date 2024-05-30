@@ -30,6 +30,7 @@ function searchVideos() {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
+
 function displayVideos() {
     const results = document.getElementById('search-results');
     results.innerHTML = '';
