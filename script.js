@@ -32,9 +32,9 @@ function displayVideos() {
                 iframe.msRequestFullscreen();
             }
              // Ajouter les événements pour quitter le plein écran
-            iframe.addEventListener('pause', exitFullScreen);
-            iframe.addEventListener('ended', exitFullScreen);
-            iframe.addEventListener('click', exitFullScreen);
+           // iframe.addEventListener('pause', exitFullScreen);
+          //  iframe.addEventListener('ended', exitFullScreen);
+          //  iframe.addEventListener('click', exitFullScreen);
         });
         results.appendChild(videoItem);
     });
