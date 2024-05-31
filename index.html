@@ -134,18 +134,18 @@
         <div class="video-list">
             <div class="search-container">
                 <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
-            </div>
             <div id="search-results"></div>
         </div>
-        <div class="video-player">
-            <h1>YADELAGADOU TV</h1>
-            <iframe id="youtube-video" src="https://www.youtube.com/embed/nMsJ0zgy_As" frameborder="0" allowfullscreen></iframe>
-            ////////////////////////////////////
-             <button id="exit-fullscreen" onclick="exitFullScreen()">Quitter le plein écran</button>
-            //////////////////////////////////////////////////////////////////////////
+        <div id="video-player">
+            <div class="video-wrapper">
+                <iframe id="youtube-video" src="" frameborder="0" allowfullscreen></iframe>
+                <button id="exit-fullscreen" onclick="exitFullScreen()">Quitter le plein écran</button>
+            </div>
         </div>
-    </div>
-
+    </main>
+    <footer>
+        <p>&copy; 2023 My Video Player</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
