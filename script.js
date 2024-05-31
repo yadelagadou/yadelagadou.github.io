@@ -20,6 +20,17 @@ function displayVideos() {
         videoItem.addEventListener('click', function() {
             const iframe = document.getElementById('youtube-video');
             iframe.src = `https://www.youtube.com/embed/${video.id}`;
+            
+            // Mettre en plein écran
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE/Edge
+                iframe.msRequestFullscreen();
+            }
         });
         results.appendChild(videoItem);
     });
@@ -39,42 +50,22 @@ function searchVideos() {
         videoItem.addEventListener('click', function() {
             const iframe = document.getElementById('youtube-video');
             iframe.src = `https://www.youtube.com/embed/${video.id}`;
+            
+            // Mettre en plein écran
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE/Edge
+                iframe.msRequestFullscreen();
+            }
         });
         results.appendChild(videoItem);
     });
 
     if (filteredVideos.length === 0) {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
-    }
-}
-
-// Mettre la vidéo en plein écran lors du clic sur l'iframe
-document.getElementById('youtube-video').addEventListener('click', function () {
-    const iframe = this;
-    if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-    } else if (iframe.mozRequestFullScreen) { // Firefox
-        iframe.mozRequestFullScreen();
-    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
-        iframe.webkitRequestFullscreen();
-    } else if (iframe.msRequestFullscreen) { // IE/Edge
-        iframe.msRequestFullscreen();
-    }
-});
-
-// Écouter les événements de fin de lecture pour sortir du mode plein écran
-document.getElementById('youtube-video').addEventListener('pause', exitFullScreen);
-document.getElementById('youtube-video').addEventListener('ended', exitFullScreen);
-
-function exitFullScreen() {
-    const iframe = document.getElementById('youtube-video');
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { // Firefox
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { // Chrome, Safari et Opera
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { // IE/Edge
-        document.msExitFullscreen();
     }
 }
