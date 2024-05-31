@@ -108,25 +108,6 @@
             z-index: 1000;
             background: #000;
         }
-        ////////////////////////////////////////////
-        /* Styles pour le bouton de sortie */
-#exit-fullscreen {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.video-wrapper {
-    position: relative;
-}
-        //////////////////////////////////////////
     </style>
 </head>
 <body>
@@ -134,18 +115,15 @@
         <div class="video-list">
             <div class="search-container">
                 <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
+            </div>
             <div id="search-results"></div>
         </div>
-        <div id="video-player">
-            <div class="video-wrapper">
-                <iframe id="youtube-video" src="" frameborder="0" allowfullscreen></iframe>
-                <button id="exit-fullscreen" onclick="exitFullScreen()">Quitter le plein écran</button>
-            </div>
+        <div class="video-player">
+            <h1>Recherche de Vidéos YouTube</h1>
+            <iframe id="youtube-video" src="https://www.youtube.com/embed/nMsJ0zgy_As" frameborder="0" allowfullscreen></iframe>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2023 My Video Player</p>
-    </footer>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
