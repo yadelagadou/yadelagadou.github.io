@@ -31,13 +31,13 @@ function displayVideos() {
             } else if (iframe.msRequestFullscreen) { // IE/Edge
                 iframe.msRequestFullscreen();
             }
-             // Ajouter les événements pour quitter le plein écran
-           // iframe.addEventListener('pause', exitFullScreen);
-          //  iframe.addEventListener('ended', exitFullScreen);
-          //  iframe.addEventListener('click', exitFullScreen);
+            //////////////////////////////////////////////
+   // Afficher le bouton de sortie
+            document.getElementById('exit-fullscreen').style.display = 'block';
         });
         results.appendChild(videoItem);
     });
+    /////////////////////////////////////////////////////
 }
 
 function searchVideos() {
