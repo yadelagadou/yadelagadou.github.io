@@ -73,3 +73,21 @@ function searchVideos() {
         results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
     }
 }
+/////////////////////////////////////////////
+function exitFullScreen() {
+    if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { // Firefox
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { // Chrome, Safari et Opera
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { // IE/Edge
+            document.msExitFullscreen();
+        }
+
+        // Cacher le bouton de sortie
+        document.getElementById('exit-fullscreen').style.display = 'none';
+    }
+}
+/////////////////////////////////////////////////////////////
