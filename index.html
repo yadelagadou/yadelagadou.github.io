@@ -27,16 +27,42 @@
     <meta name="twitter:site" content="@VotreCompteTwitter">
 
     <style>
-        body {
-            background-color: #f0f2f5;
-            color: #333;
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-        }
+       /* Styles pour l'image de fond */
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+header, main, footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Ajout d'un fond blanc translucide pour la lisibilité */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+#search-query {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.video-item {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-item h3 {
+    margin: 0;
+}
         .container {
             display: flex;
             width: 100%;
