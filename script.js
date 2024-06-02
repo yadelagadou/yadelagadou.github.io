@@ -1,16 +1,12 @@
-let videos = [];
+const videos = [
+    { id: 'nMsJ0zgy_As', title: 'YADELAGADOU TV - Présentation' },
+    { id: 'abcd1234', title: 'Visite de la Normandie' },
+    { id: 'efgh5678', title: 'Cuisine Normande' },
+    { id: 'ijkl9012', title: 'Histoire de la Normandie' }
+];
 
-fetch('videos.json')
-    .then(response => response.json())
-    .then(data => {
-        videos = data;
-        displayVideos();
-    })
-    .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
-
-function displayVideos() {
+document.addEventListener('DOMContentLoaded', () => {
     const results = document.getElementById('search-results');
-    results.innerHTML = '';
 
     videos.forEach(video => {
         const videoItem = document.createElement('div');
@@ -21,31 +17,24 @@ function displayVideos() {
             const iframe = document.getElementById('youtube-video');
             iframe.src = `https://www.youtube.com/embed/${video.id}`;
             
-            // Mettre en plein écran
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.mozRequestFullScreen) { // Firefox
-                iframe.mozRequestFullScreen();
-            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) { // IE/Edge
-                iframe.msRequestFullscreen();
-            }
-            //////////////////////////////////////////////
-   // Afficher le bouton de sortie
-            document.getElementById('exit-fullscreen').style.display = 'block';
+            const player = document.querySelector('.video-player');
+            player.classList.add('full-screen-video');
+
+            const exitButton = document.getElementById('exit-fullscreen');
+            exitButton.style.display = 'block';
         });
+
         results.appendChild(videoItem);
     });
-    /////////////////////////////////////////////////////
-}
+});
 
 function searchVideos() {
-    const query = document.getElementById('search-query').value.trim().toLowerCase();
+    const query = document.getElementById('search-query').value.toLowerCase();
+    const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
+
     const results = document.getElementById('search-results');
     results.innerHTML = '';
 
-    const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
     filteredVideos.forEach(video => {
         const videoItem = document.createElement('div');
         videoItem.classList.add('video-item');
@@ -55,39 +44,21 @@ function searchVideos() {
             const iframe = document.getElementById('youtube-video');
             iframe.src = `https://www.youtube.com/embed/${video.id}`;
             
-            // Mettre en plein écran
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.mozRequestFullScreen) { // Firefox
-                iframe.mozRequestFullScreen();
-            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) { // IE/Edge
-                iframe.msRequestFullscreen();
-            }
+            const player = document.querySelector('.video-player');
+            player.classList.add('full-screen-video');
+
+            const exitButton = document.getElementById('exit-fullscreen');
+            exitButton.style.display = 'block';
         });
+
         results.appendChild(videoItem);
     });
-
-    if (filteredVideos.length === 0) {
-        results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
-    }
 }
-/////////////////////////////////////////////
+
 function exitFullScreen() {
-    if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.mozCancelFullScreen) { // Firefox
-            document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) { // Chrome, Safari et Opera
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { // IE/Edge
-            document.msExitFullscreen();
-        }
+    const player = document.querySelector('.video-player');
+    player.classList.remove('full-screen-video');
 
-        // Cacher le bouton de sortie
-        document.getElementById('exit-fullscreen').style.display = 'none';
-    }
+    const exitButton = document.getElementById('exit-fullscreen');
+    exitButton.style.display = 'none';
 }
-/////////////////////////////////////////////////////////////
