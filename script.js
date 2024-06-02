@@ -7,21 +7,6 @@ fetch('videos.json')
         displayVideos();
     })
     .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
-	
-	document.addEventListener('DOMContentLoaded', () => {
-    const results = document.getElementById('search-results');
-    const marqueeMessage = document.getElementById('marquee-message');
-
-    // Load marquee message from a text file
-    fetch('marquee.txt')
-        .then(response => response.text())
-        .then(data => {
-            marqueeMessage.innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error loading marquee message:', error);
-            marqueeMessage.innerHTML = 'Bienvenue sur YADELAGADOU TV! 🌟 Profitez de nos vidéos!';
-        });
 
 function displayVideos() {
     const results = document.getElementById('search-results');
