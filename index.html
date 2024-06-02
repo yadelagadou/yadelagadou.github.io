@@ -27,75 +27,54 @@
     <meta name="twitter:site" content="@VotreCompteTwitter">
 
     <style>
-/* Styles existants */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-/* Styles pour le bouton de sortie */
-#exit-fullscreen {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-.video-wrapper {
-    position: relative;
-}
+        header, main, footer {
+            background-color: rgba(0, 255, 0, 0.3);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
 
-/* Styles pour l'image de fond */
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Pour éviter le défilement */
-}
+        #search-query {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-body {
-    background-image: url('background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+        .video-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-header, main, footer {
-    background-color: rgba(0, 255, 0, 0.3); /* Ajout d'un fond blanc translucide pour la lisibilité */
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    max-width: 90%;
-    box-sizing: border-box;
-}
-
-#search-query {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.video-item {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.video-item h3 {
-    margin: 0;
-}
+        .video-item h3 {
+            margin: 0;
+        }
 
         .container {
             display: flex;
@@ -168,9 +147,115 @@ header, main, footer {
             z-index: 1000;
             background: #000;
         }
+
+        #exit-fullscreen {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Styles pour les petits écrans */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                margin: 10px;
+            }
+
+            .video-list, .video-player {
+                max-width: 100%;
+                margin: 10px 0;
+                box-shadow: none;
+                padding: 10px;
+            }
+
+            #youtube-video {
+                height: 200px;
+            }
+
+            .video-list {
+                margin-right: 0;
+            }
+
+            .video-item {
+                margin: 5px 0;
+                padding: 5px;
+            }
+
+            .search-container input {
+                padding: 8px;
+            }
+
+            header, main, footer {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            .navbar {
+                display: none;
+                flex-direction: column;
+                background-color: #fff;
+                width: 100%;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                z-index: 1000;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar a {
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .navbar a:last-child {
+                border-bottom: none;
+            }
+
+            .hamburger-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .hamburger-icon div {
+                width: 25px;
+                height: 3px;
+                background-color: #333;
+                margin: 4px 0;
+                transition: all 0.3s ease;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Menu Hamburger -->
+    <div class="hamburger-icon" onclick="toggleNavbar()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav class="navbar">
+        <a href="#home">Accueil</a>
+        <a href="#videos">Vidéos</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
     <div class="container">
         <div class="video-list">
             <div class="search-container">
@@ -181,9 +266,16 @@ header, main, footer {
         <div class="video-player">
             <h1>YADELAGADOU TV La Chaine 100% Normande</h1>
             <iframe id="youtube-video" src="https://www.youtube.com/embed/nMsJ0zgy_As" frameborder="0" allowfullscreen></iframe>
+            <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function toggleNavbar() {
+            const navbar = document.querySelector('.navbar');
+            navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
 </body>
 </html>
