@@ -1,281 +1,93 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yadelagadou TV - Vidéos YouTube 100% Normandes</title>
-    <meta name="description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos divertissantes et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
-    <meta name="keywords" content="Yadelagadou TV, vidéos YouTube, Normandie, vidéos normandes, culture normande, divertissement">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://yadelagadou.com/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+let videos = [];
 
-    <!-- Balises Open Graph pour les réseaux sociaux -->
-    <meta property="og:title" content="Yadelagadou TV - Vidéos YouTube 100% Normandes">
-    <meta property="og:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos divertissantes et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
-    <meta property="og:image" content="https://yadelagadou.com/images/thumbnail.jpg">
-    <meta property="og:url" content="https://yadelagadou.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Yadelagadou TV">
+fetch('videos.json')
+    .then(response => response.json())
+    .then(data => {
+        videos = data;
+        displayVideos();
+    })
+    .catch(error => console.error('Erreur lors du chargement des vidéos :', error));
 
-    <!-- Balises Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Yadelagadou TV - Vidéos YouTube 100% Normandes">
-    <meta name="twitter:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos divertissantes et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
-    <meta name="twitter:image" content="https://yadelagadou.com/images/thumbnail.jpg">
-    <meta name="twitter:site" content="@VotreCompteTwitter">
+function displayVideos() {
+    const results = document.getElementById('search-results');
+    results.innerHTML = '';
 
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        body {
-            background-image: url('background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        header, main, footer {
-            background-color: rgba(0, 255, 0, 0.3);
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
-            max-width: 90%;
-            box-sizing: border-box;
-        }
-
-        #search-query {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .video-item {
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .video-item h3 {
-            margin: 0;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px;
-        }
-        .video-list {
-            flex: 1;
-            margin-right: 20px;
-            max-width: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .search-container {
-            width: 100%;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .search-container input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .video-list .video-item {
-            cursor: pointer;
-            margin: 10px 0;
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        .video-list .video-item:hover {
-            background-color: #e9ecef;
-        }
-        .video-player {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        #youtube-video {
-            width: 100%;
-            max-width: 100%;
-            height: 315px;
-        }
-        .video-player h1 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .full-screen-video {
-            width: 100% !important;
-            height: 100% !important;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background: #000;
-        }
-
-        #exit-fullscreen {
-            display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        /* Styles pour les petits écrans */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-                margin: 10px;
+    videos.forEach(video => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+        videoItem.setAttribute('data-video-id', video.id);
+        videoItem.innerHTML = `<h3>${video.title}</h3>`;
+        videoItem.addEventListener('click', function() {
+            const iframe = document.getElementById('youtube-video');
+            iframe.src = `https://www.youtube.com/embed/${video.id}`;
+            
+            // Mettre en plein écran
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE/Edge
+                iframe.msRequestFullscreen();
             }
+            //////////////////////////////////////////////
+   // Afficher le bouton de sortie
+            document.getElementById('exit-fullscreen').style.display = 'block';
+        });
+        results.appendChild(videoItem);
+    });
+    /////////////////////////////////////////////////////
+}
 
-            .video-list, .video-player {
-                max-width: 100%;
-                margin: 10px 0;
-                box-shadow: none;
-                padding: 10px;
-            }
+function searchVideos() {
+    const query = document.getElementById('search-query').value.trim().toLowerCase();
+    const results = document.getElementById('search-results');
+    results.innerHTML = '';
 
-            #youtube-video {
-                height: 200px;
+    const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
+    filteredVideos.forEach(video => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+        videoItem.setAttribute('data-video-id', video.id);
+        videoItem.innerHTML = `<h3>${video.title}</h3>`;
+        videoItem.addEventListener('click', function() {
+            const iframe = document.getElementById('youtube-video');
+            iframe.src = `https://www.youtube.com/embed/${video.id}`;
+            
+            // Mettre en plein écran
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE/Edge
+                iframe.msRequestFullscreen();
             }
+        });
+        results.appendChild(videoItem);
+    });
 
-            .video-list {
-                margin-right: 0;
-            }
-
-            .video-item {
-                margin: 5px 0;
-                padding: 5px;
-            }
-
-            .search-container input {
-                padding: 8px;
-            }
-
-            header, main, footer {
-                padding: 15px;
-                margin: 10px;
-            }
-
-            .hamburger-menu {
-                display: block;
-            }
-
-            .navbar {
-                display: none;
-                flex-direction: column;
-                background-color: #fff;
-                width: 100%;
-                position: absolute;
-                top: 50px;
-                left: 0;
-                z-index: 1000;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .navbar a {
-                padding: 15px;
-                text-align: center;
-                border-bottom: 1px solid #ddd;
-            }
-
-            .navbar a:last-child {
-                border-bottom: none;
-            }
-
-            .hamburger-icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 10px;
-                cursor: pointer;
-            }
-
-            .hamburger-icon div {
-                width: 25px;
-                height: 3px;
-                background-color: #333;
-                margin: 4px 0;
-                transition: all 0.3s ease;
-            }
+    if (filteredVideos.length === 0) {
+        results.innerHTML = '<p>Aucune vidéo trouvée.</p>';
+    }
+}
+/////////////////////////////////////////////
+function exitFullScreen() {
+    if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { // Firefox
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { // Chrome, Safari et Opera
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { // IE/Edge
+            document.msExitFullscreen();
         }
-    </style>
-</head>
-<body>
-    <!-- Menu Hamburger -->
-    <div class="hamburger-icon" onclick="toggleNavbar()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <nav class="navbar">
-        <a href="#home">Accueil</a>
-        <a href="#videos">Vidéos</a>
-        <a href="#about">À propos</a>
-        <a href="#contact">Contact</a>
-    </nav>
 
-    <div class="container">
-        <div class="video-list">
-            <div class="search-container">
-                <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
-            </div>
-            <div id="search-results"></div>
-        </div>
-        <div class="video-player">
-            <h1>YADELAGADOU TV La Chaine 100% Normande</h1>
-            <iframe id="youtube-video" src="https://www.youtube.com/embed/nMsJ0zgy_As" frameborder="0" allowfullscreen></iframe>
-            <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script>
-        function toggleNavbar() {
-            const navbar = document.querySelector('.navbar');
-            navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
-        }
-    </script>
-</body>
-</html>
+        // Cacher le bouton de sortie
+        document.getElementById('exit-fullscreen').style.display = 'none';
+    }
+}
+/////////////////////////////////////////////////////////////
