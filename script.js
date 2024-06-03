@@ -25,12 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 videoItem.addEventListener('click', function() {
                     const iframe = document.getElementById('youtube-video');
                     iframe.src = `https://www.youtube.com/embed/${video.id}`;
-                    
-                    const player = document.querySelector('.video-player');
-                    player.classList.add('full-screen-video');
-
-                    const exitButton = document.getElementById('exit-fullscreen');
-                    exitButton.style.display = 'block';
+                    enterFullScreen(iframe);
                 });
 
                 results.appendChild(videoItem);
@@ -60,12 +55,7 @@ function searchVideos() {
                 videoItem.addEventListener('click', function() {
                     const iframe = document.getElementById('youtube-video');
                     iframe.src = `https://www.youtube.com/embed/${video.id}`;
-                    
-                    const player = document.querySelector('.video-player');
-                    player.classList.add('full-screen-video');
-
-                    const exitButton = document.getElementById('exit-fullscreen');
-                    exitButton.style.display = 'block';
+                    enterFullScreen(iframe);
                 });
 
                 results.appendChild(videoItem);
@@ -76,10 +66,26 @@ function searchVideos() {
         });
 }
 
-function exitFullScreen() {
-    const player = document.querySelector('.video-player');
-    player.classList.remove('full-screen-video');
+function enterFullScreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+    }
+}
 
-    const exitButton = document.getElementById('exit-fullscreen');
-    exitButton.style.display = 'none';
+function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+    }
 }
