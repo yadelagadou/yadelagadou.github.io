@@ -139,4 +139,10 @@ body {
     .video-list {
         max-height: 150px; /* Hauteur encore plus réduite pour les très petits écrans */
     }
+    #site-title {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
 }
