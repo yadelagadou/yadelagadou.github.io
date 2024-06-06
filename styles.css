@@ -132,7 +132,7 @@ body {
     }
 
     .video-list {
-        max-height: 300px; /* Réduction de la hauteur pour les smartphones */
+        max-height: 350px; /* Réduction de la hauteur pour les smartphones */
     }
         #site-title {
     position: absolute;
@@ -147,7 +147,7 @@ body {
     }
 
     .video-list {
-        max-height: 150px; /* Hauteur encore plus réduite pour les très petits écrans */
+        max-height: 350px; /* Hauteur encore plus réduite pour les très petits écrans */
     }
     #site-title {
     position: absolute;
