@@ -62,7 +62,7 @@ body {
 
 .video-list {
     margin-bottom: 20px;
-    max-height: 250px; /* Adjust the height as needed */
+    max-height: 300px; /* Réduction de la hauteur pour faire plus de place */
     overflow-y: auto;
 }
 
@@ -125,7 +125,18 @@ body {
     .video-player iframe {
         height: 300px;
     }
-     .video-list {
+
+    .video-list {
         max-height: 200px; /* Réduction de la hauteur pour les smartphones */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-player iframe {
+        height: 250px; /* Hauteur ajustée pour les très petits écrans */
+    }
+
+    .video-list {
+        max-height: 150px; /* Hauteur encore plus réduite pour les très petits écrans */
     }
 }
