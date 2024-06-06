@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const results = document.getElementById('search-results');
     const marqueeMessage = document.getElementById('marquee-message');
+    const videoPlayer = document.querySelector('.video-player');
+    const exitFullscreenButton = document.getElementById('exit-fullscreen');
 
     // Load marquee message from a text file
     fetch('marquee.txt')
@@ -34,58 +36,27 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Error loading videos:', error);
         });
+
+    exitFullscreenButton.addEventListener('click', function() {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
+    });
+
+    document.addEventListener('fullscreenchange', function() {
+        if (document.fullscreenElement) {
+            videoPlayer.classList.add('full-screen-video');
+            exitFullscreenButton.style.display = 'block';
+        } else {
+            videoPlayer.classList.remove('full-screen-video');
+            exitFullscreenButton.style.display = 'none';
+        }
+    });
 });
 
 function searchVideos() {
     const query = document.getElementById('search-query').value.toLowerCase();
-    
+
     fetch('videos.json')
         .then(response => response.json())
-        .then(videos => {
-            const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(query));
-
-            const results = document.getElementById('search-results');
-            results.innerHTML = '';
-
-            filteredVideos.forEach(video => {
-                const videoItem = document.createElement('div');
-                videoItem.classList.add('video-item');
-                videoItem.setAttribute('data-video-id', video.id);
-                videoItem.innerHTML = `<h3>${video.title}</h3>`;
-                videoItem.addEventListener('click', function() {
-                    const iframe = document.getElementById('youtube-video');
-                    iframe.src = `https://www.youtube.com/embed/${video.id}`;
-                    enterFullScreen(iframe);
-                });
-
-                results.appendChild(videoItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error searching videos:', error);
-        });
-}
-
-function enterFullScreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) { // Firefox
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { // IE/Edge
-        element.msRequestFullscreen();
-    }
-}
-
-function exitFullScreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { // Firefox
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { // IE/Edge
-        document.msExitFullscreen();
-    }
-}
+        .then
