@@ -125,4 +125,7 @@ body {
     .video-player iframe {
         height: 300px;
     }
+     .video-list {
+        max-height: 200px; /* Réduction de la hauteur pour les smartphones */
+    }
 }
