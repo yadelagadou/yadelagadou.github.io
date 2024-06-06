@@ -59,4 +59,39 @@ function searchVideos() {
 
     fetch('videos.json')
         .then(response => response.json())
-        .then
+        .then(videos => {
+            const results = document.getElementById('search-results');
+            results.innerHTML = '';
+
+            videos
+                .filter(video => video.title.toLowerCase().includes(query))
+                .forEach(video => {
+                    const videoItem = document.createElement('div');
+                    videoItem.classList.add('video-item');
+                    videoItem.setAttribute('data-video-id', video.id);
+                    videoItem.innerHTML = `<h3>${video.title}</h3>`;
+                    videoItem.addEventListener('click', function() {
+                        const iframe = document.getElementById('youtube-video');
+                        iframe.src = `https://www.youtube.com/embed/${video.id}`;
+                        enterFullScreen(iframe);
+                    });
+
+                    results.appendChild(videoItem);
+                });
+        })
+        .catch(error => {
+            console.error('Error searching videos:', error);
+        });
+}
+
+function enterFullScreen(iframe) {
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
+    }
+}
