@@ -62,7 +62,7 @@ body {
 
 .video-list {
     margin-bottom: 20px;
-    max-height: 300px; /* Adjust the height as needed */
+    max-height: 250px; /* Adjust the height as needed */
     overflow-y: auto;
 }
 
