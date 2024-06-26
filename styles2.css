@@ -23,8 +23,8 @@ a {
 
 .hamburger-menu {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 10px; /* Reduced top margin */
+    left: 10px; /* Reduced left margin */
     z-index: 1000;
 }
 
@@ -69,7 +69,7 @@ a {
 
 .container {
     flex: 1;
-    padding: 20px;
+    padding: 10px; /* Reduced padding */
     margin-top: 60px; /* Reduced margin-top */
     display: flex;
     justify-content: center;
@@ -85,15 +85,15 @@ a {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 20px;
+    padding: 10px; /* Reduced padding */
     overflow-y: auto;
-    max-height: 500px;
+    max-height: 400px; /* Reduced height */
 }
 
 .video-item {
     background-color: #f4f4f4;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 8px; /* Reduced padding */
+    margin: 8px 0; /* Reduced margin */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -106,8 +106,8 @@ a {
 
 .search-container input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 8px; /* Reduced padding */
+    margin-bottom: 10px; /* Reduced margin */
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -116,7 +116,7 @@ a {
     flex: 2;
     min-width: 300px;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px; /* Reduced padding */
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
@@ -124,7 +124,7 @@ a {
 
 .video-player iframe {
     width: 100%;
-    height: 500px;
+    height: 300px; /* Reduced height */
 }
 
 #exit-fullscreen {
@@ -166,45 +166,45 @@ footer {
 
     .navbar a {
         text-align: center;
-        padding: 15px;
+        padding: 10px; /* Reduced padding */
         border-top: 1px solid #575757;
     }
 
     .video-player iframe {
-        height: 300px;
+        height: 250px; /* Reduced height */
     }
 
     .video-list {
-        max-height: 350px;
+        max-height: 300px; /* Reduced height */
     }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 10px;
-        margin-top: 50px; /* Further reduced margin-top for smaller screens */
+        padding: 5px; /* Further reduced padding */
+        margin-top: 50px; /* Further reduced margin-top */
     }
 
     .navbar a {
-        padding: 10px;
+        padding: 8px; /* Further reduced padding */
         font-size: 14px;
     }
 
     .video-player iframe {
-        height: 250px;
+        height: 220px; /* Further reduced height */
     }
 
     .video-list {
-        max-height: 300px; /* Reduced height for very small screens */
-        padding: 10px; /* Reduced padding */
+        max-height: 250px; /* Further reduced height */
+        padding: 8px; /* Further reduced padding */
     }
 
     .video-item {
-        padding: 8px;
-        margin: 8px 0;
+        padding: 6px; /* Further reduced padding */
+        margin: 6px 0; /* Further reduced margin */
     }
 
     .search-container input {
-        padding: 8px;
+        padding: 6px; /* Further reduced padding */
     }
 }
