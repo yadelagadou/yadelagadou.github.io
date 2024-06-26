@@ -99,6 +99,8 @@ a {
     margin-bottom: 10px; /* Espace en bas */
     display: flex;
     justify-content: center;
+    border: 2px solid #fff; /* Ajout d'une bordure blanche */
+    border-radius: 10px; /* Bordures arrondies */
 }
 
 .search-container input {
