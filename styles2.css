@@ -2,13 +2,14 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background: linear-gradient(to bottom right, #FFCC00, #CC0000);
+    /* Remplace #FFCC00 et #CC0000 par les couleurs que vous préférez */
 }
 
 body {
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
     color: #333;
 }
 
@@ -26,7 +27,7 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.9);
     color: white;
 }
 
@@ -58,7 +59,7 @@ a {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.9);
     padding: 10px;
     position: fixed;
     width: 100%;
@@ -154,12 +155,12 @@ a {
 }
 
 footer {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.9);
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: relative;
     width: 100%;
+    position: relative;
     bottom: 0;
 }
 
