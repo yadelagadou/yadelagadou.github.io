@@ -65,12 +65,37 @@ a {
 .container {
     padding: 20px;
     margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .video-list {
-    margin-bottom: 20px;
-    max-height: 300px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
     overflow-y: auto;
+    max-height: 500px;
+}
+
+.video-item {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item:hover {
+    background-color: #e4e4e4;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .search-container input {
@@ -82,6 +107,8 @@ a {
 }
 
 .video-player {
+    flex: 2;
+    min-width: 300px;
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;
