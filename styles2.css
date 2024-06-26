@@ -1,8 +1,13 @@
-body {
-    font-family: 'Roboto', sans-serif;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f4;
     color: #333;
 }
@@ -63,6 +68,7 @@ a {
 }
 
 .container {
+    flex: 1;
     padding: 20px;
     margin-top: 80px;
     display: flex;
@@ -139,7 +145,7 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: absolute;
+    position: relative;
     width: 100%;
     bottom: 0;
 }
