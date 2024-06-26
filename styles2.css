@@ -257,6 +257,13 @@ footer {
         border-top: 1px solid #575757;
     }
 
+    .search-container {
+        margin-top: 70px; /* Ajustement pour la position sous la navbar sur petits écrans */
+        margin-bottom: 10px; /* Espace en bas */
+        padding: 10px; /* Assure que le padding est inclus dans la largeur totale */
+        width: calc(100% - 20px); /* Ajustement pour petits écrans */
+    }
+
     .video-player {
         height: auto; /* Adjust height to auto for portrait mode */
     }
@@ -280,6 +287,13 @@ footer {
     .navbar a {
         padding: 8px;
         font-size: 14px;
+    }
+
+    .search-container {
+        margin-top: 60px; /* Ajustement pour la position sous la navbar sur petits écrans */
+        margin-bottom: 10px; /* Espace en bas */
+        padding: 10px; /* Assure que le padding est inclus dans la largeur totale */
+        width: calc(100% - 10px); /* Ajustement pour petits écrans */
     }
 
     .video-player iframe {
