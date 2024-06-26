@@ -70,7 +70,7 @@ a {
 .container {
     flex: 1;
     padding: 20px;
-    margin-top: 80px;
+    margin-top: 60px; /* Reduced margin-top */
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -180,11 +180,31 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 10px;
+        margin-top: 50px; /* Further reduced margin-top for smaller screens */
+    }
+
+    .navbar a {
+        padding: 10px;
+        font-size: 14px;
+    }
+
     .video-player iframe {
         height: 250px;
     }
 
     .video-list {
-        max-height: 350px;
+        max-height: 300px; /* Reduced height for very small screens */
+        padding: 10px; /* Reduced padding */
+    }
+
+    .video-item {
+        padding: 8px;
+        margin: 8px 0;
+    }
+
+    .search-container input {
+        padding: 8px;
     }
 }
