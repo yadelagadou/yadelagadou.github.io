@@ -47,11 +47,13 @@
         <a href="#normandie">Découvrir la Normandie</a>
     </nav>
 
+    <!-- Conteneur pour la barre de recherche -->
+    <div class="search-container">
+        <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
+    </div>
+
     <div class="container">
         <div class="video-list">
-            <div class="search-container">
-                <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
-            </div>
             <div id="search-results"></div>
         </div>
         <div class="video-player">

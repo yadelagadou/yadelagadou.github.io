@@ -90,10 +90,29 @@ a {
     border-radius: 4px;
 }
 
+/* Nouveau conteneur pour la barre de recherche */
+.search-container {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    margin-top: 80px; /* Ajustement pour la position sous la navbar */
+    margin-bottom: 10px; /* Espace en bas */
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input {
+    width: 100%;
+    max-width: 600px; /* Limite la largeur maximale */
+    padding: 10px;
+    border: 2px solid #ccc; /* Bordure */
+    border-radius: 4px; /* Bordures arrondies */
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+}
+
 .container {
     flex: 1;
     padding: 10px;
-    margin-top: 60px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -133,15 +152,6 @@ a {
     background-color: #e4e4e4;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     border-color: #999; /* Change la couleur de la bordure au survol */
-}
-
-.search-container input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
 }
 
 .video-player {
