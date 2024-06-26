@@ -3,41 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yadelagadou TV - Vidéos YouTube 100% Normandes</title>
-    <meta name="description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos divertissantes et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
-    <meta name="keywords" content="Yadelagadou TV, vidéos YouTube, Normandie, vidéos normandes, culture normande, divertissement">
+    <title>Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie</title>
+    <meta name="description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires sur la Basse et Haute Normandie.">
+    <meta name="keywords" content="Yadelagadou TV, vidéos humoristiques, Normandie, vidéos normandes, culture normande, divertissement, Basse Normandie, Haute Normandie, que faire en Normandie, bienvenue en Normandie">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yadelagadou.com/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
     <!-- Balises Open Graph pour les réseaux sociaux -->
-    <meta property="og:title" content="Yadelagadou TV - Vidéos YouTube 100% Normandes">
-    <meta property="og:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos divertissantes et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
+    <meta property="og:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
+    <meta property="og:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
     <meta property="og:image" content="https://yadelagadou.com/images/thumbnail.jpg">
     <meta property="og:url" content="https://yadelagadou.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Yadelagadou TV">
     <!-- Balises Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Yadelagadou TV - Vidéos YouTube 100% Normandes">
-    <meta name="twitter:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos divertissantes et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
+    <meta name="twitter:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
+    <meta name="twitter:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
     <meta name="twitter:image" content="https://yadelagadou.com/images/thumbnail.jpg">
     <meta name="twitter:site" content="@VotreCompteTwitter">
 </head>
 <body>
-    <!-- Bannière défilante -->
-    <div class="marquee-container">
-        <div class="marquee" id="marquee-message"></div>
-    </div>
-
-    <!-- Menu hamburger -->
-    <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleNavbar()">
-            <div></div>
-            <div></div>
-            <div></div>
+    <div class="header">
+        <!-- Menu hamburger -->
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleNavbar()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
+
+        <!-- Titre du site -->
+        <h1 class="site-title">Yadelagadou TV</h1>
     </div>
 
     <!-- Barre de navigation -->
@@ -46,21 +44,28 @@
         <a href="#videos">Vidéos</a>
         <a href="#about">À propos</a>
         <a href="#contact">Contact</a>
+        <a href="#normandie">Découvrir la Normandie</a>
     </nav>
+
+    <!-- Conteneur pour la barre de recherche -->
+    <div class="search-container">
+        <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
+    </div>
 
     <div class="container">
         <div class="video-list">
-            <div class="search-container">
-                <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
-            </div>
             <div id="search-results"></div>
         </div>
         <div class="video-player">
-            <h1 id="site-title">YADELAGADOU TV La Chaine 100% Normande</h1>
+            <h2 id="site-title">YADELAGADOU TV La Chaine 100% Normande</h2>
             <iframe id="youtube-video" src="https://www.youtube.com/embed/UXo6LRx0pHE" frameborder="0" allowfullscreen></iframe>
             <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2024 Yadelagadou TV. Tous droits réservés.</p>
+    </footer>
 
     <script src="script.js"></script>
     <script>
