@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom right, #FFCC00, #CC0000);
-    /* Remplace #FFCC00 et #CC0000 par les couleurs que vous préférez */
+    /* Remplacez #FFCC00 et #CC0000 par les couleurs que vous préférez */
 }
 
 body {
@@ -162,6 +162,32 @@ footer {
     width: 100%;
     position: relative;
     bottom: 0;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .video-list {
+        flex: 1;
+        max-height: 100%;
+        overflow-y: auto;
+    }
+
+    .video-player {
+        flex: 3;
+        max-height: 100%;
+    }
+
+    .video-player iframe {
+        height: 100%;
+    }
 }
 
 @media (max-width: 768px) {
