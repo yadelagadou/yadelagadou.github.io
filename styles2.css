@@ -95,7 +95,7 @@ a {
     width: 100%;
     padding: 10px 20px;
     box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
-    margin-top: 80px; /* Ajustement pour la position sous la navbar */
+    margin-top: 70px; /* Ajustement pour la position sous la navbar */
     margin-bottom: 10px; /* Espace en bas */
     display: flex;
     justify-content: center;
@@ -204,8 +204,8 @@ footer {
 
 @media (min-width: 1024px) {
     .container {
-        height: calc(100vh - 60px);
-        margin-top: 60px;
+        height: calc(100vh - 70px); /* Ajusté pour éviter le léger défilement */
+        margin-top: 70px; /* Ajustement pour la position sous la navbar */
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -228,7 +228,7 @@ footer {
     }
 }
 
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 768px) {
     .header {
         justify-content: center;
     }
@@ -264,6 +264,14 @@ footer {
         width: calc(100% - 20px); /* Ajustement pour petits écrans */
     }
 
+    .container {
+        margin-top: 10px; /* Réduit l'espace au-dessus du conteneur */
+        margin-bottom: 0; /* Élimine l'espace en bas */
+        padding: 10px;
+        height: calc(100vh - 160px); /* Ajuste pour éviter le défilement */
+        overflow-y: hidden; /* Empêche le défilement vertical */
+    }
+
     .video-player {
         height: auto; /* Adjust height to auto for portrait mode */
     }
@@ -273,15 +281,18 @@ footer {
     }
 
     .video-list {
-        max-height: 300px;
+        max-height: calc(100vh - 320px); /* Ajusté pour éviter le défilement */
         max-width: 100%; /* S'assure que la liste de vidéos n'excède pas la largeur disponible */
     }
 }
 
-@media (max-width: 480px) and (orientation: portrait) {
+@media (max-width: 480px) {
     .container {
         padding: 5px;
-        margin-top: 50px;
+        margin-top: 10px; /* Réduit l'espace au-dessus du conteneur */
+        margin-bottom: 0; /* Élimine l'espace en bas */
+        height: calc(100vh - 150px); /* Ajuste pour éviter le défilement */
+        overflow-y: hidden; /* Empêche le défilement vertical */
     }
 
     .navbar a {
@@ -301,7 +312,7 @@ footer {
     }
 
     .video-list {
-        max-height: 250px;
+        max-height: calc(100vh - 300px); /* Ajusté pour éviter le défilement */
         padding: 8px;
         max-width: 100%; /* S'assure que la liste de vidéos n'excède pas la largeur disponible */
     }
