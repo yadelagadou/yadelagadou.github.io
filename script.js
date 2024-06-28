@@ -59,13 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Empêcher la soumission par défaut du formulaire
 
         const formData = new FormData(form);
+        const formObject = {};
+        formData.forEach((value, key) => {
+            formObject[key] = value;
+        });
 
         fetch(form.action, {
             method: 'POST',
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: formData
+            body: new URLSearchParams(formObject).toString()
         }).then(response => {
             if (response.ok) {
                 form.reset();
