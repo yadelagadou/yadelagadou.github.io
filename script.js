@@ -58,35 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Empêcher la soumission par défaut du formulaire
 
-        const formData = new FormData(form);
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
-
-        fetch(form.action, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams(formObject).toString()
-        }).then(response => {
-            if (response.ok) {
+        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form)
+            .then(function(response) {
                 form.reset();
                 formMessage.style.display = 'block';
                 formMessage.textContent = 'Merci! Votre message a été envoyé.';
                 formMessage.classList.remove('error');
-            } else {
+            }, function(error) {
                 formMessage.style.display = 'block';
                 formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
                 formMessage.classList.add('error');
-            }
-        }).catch(error => {
-            formMessage.style.display = 'block';
-            formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
-            formMessage.classList.add('error');
-        });
+            });
     });
 });
 
