@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie</title>
+    <meta name="description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires sur la Basse et Haute Normandie.">
+    <meta name="keywords" content="Yadelagadou TV, vidéos humoristiques, Normandie, vidéos normandes, culture normande, divertissement, Basse Normandie, Haute Normandie, que faire en Normandie, bienvenue en Normandie">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yadelagadou.com/">
+    <link rel="stylesheet" href="styles2.css">
+    <!-- Balises Open Graph pour les réseaux sociaux -->
+    <meta property="og:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
+    <meta property="og:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
+    <meta property="og:image" content="https://yadelagadou.com/images/thumbnail.jpg">
+    <meta property="og:url" content="https://yadelagadou.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yadelagadou TV">
+    <!-- Balises Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
+    <meta name="twitter:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
+    <meta name="twitter:image" content="https://yadelagadou.com/images/thumbnail.jpg">
+    <meta name="twitter:site" content="@VotreCompteTwitter">
+</head>
+<body>
+    <div class="header">
+        <!-- Menu hamburger -->
+        <div class="hamburger-icon" onclick="toggleNavbar()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h1 class="site-title">Yadelagadou TV</h1>
+    </div>
+
+    <nav class="navbar">
+        <a href="#home">Accueil</a>
+        <a href="#videos">Vidéos</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+        <a href="#normandie">Découvrir la Normandie</a>
+    </nav>
+
+    <div class="search-container" id="home">
+        <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
+    </div>
+
+    <div class="container">
+        <div class="video-list">
+            <div id="search-results"></div>
+        </div>
+        <div class="video-player">
+            <h2 id="site-title">YADELAGADOU TV La Chaine 100% Normande</h2>
+            <iframe id="youtube-video" src="https://www.youtube.com/embed/UXo6LRx0pHE" frameborder="0" allowfullscreen></iframe>
+            <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
+        </div>
+    </div>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact-section">
+        <h2>Contactez-nous</h2>
+        <p>Nous serions ravis de vous entendre. Utilisez le formulaire ci-dessous pour nous envoyer un message :</p>
+        <form action="send_form.php" method="POST">
+            <div class="form-group">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Yadelagadou TV. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleNavbar() {
+            const navbar = document.querySelector('.navbar');
+            navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
