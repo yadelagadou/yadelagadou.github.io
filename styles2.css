@@ -376,3 +376,19 @@ footer {
     background-color: #FFCC00;
     color: #333;
 }
+
+#form-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    border-radius: 5px;
+    display: none;
+}
+
+#form-message.error {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}

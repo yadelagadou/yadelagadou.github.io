@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const marqueeMessage = document.getElementById('marquee-message');
     const videoPlayer = document.querySelector('.video-player');
     const exitFullscreenButton = document.getElementById('exit-fullscreen');
+    const form = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
 
     // Load marquee message from a text file
     fetch('marquee.txt')
@@ -52,6 +54,35 @@ document.addEventListener('DOMContentLoaded', () => {
             exitFullscreenButton.style.display = 'none';
         }
     });
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                form.reset();
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Merci! Votre message a été envoyé.';
+                formMessage.classList.remove('error');
+            } else {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
+                formMessage.classList.add('error');
+            }
+        }).catch(error => {
+            formMessage.style.display = 'block';
+            formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
+            formMessage.classList.add('error');
+        });
+    });
 });
 
 function searchVideos() {
@@ -89,7 +120,7 @@ function enterFullScreen(iframe) {
         iframe.requestFullscreen();
     } else if (iframe.mozRequestFullScreen) { // Firefox
         iframe.mozRequestFullScreen();
-    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
         iframe.webkitRequestFullscreen();
     } else if (iframe.msRequestFullscreen) { // IE/Edge
         iframe.msRequestFullscreen();

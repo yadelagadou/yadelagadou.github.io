@@ -57,11 +57,10 @@
         </div>
     </div>
 
-    <!-- Section Contact -->
 <section id="contact" class="contact-section">
     <h2>Contactez-nous</h2>
     <p>Nous serions ravis de vous entendre. Utilisez le formulaire ci-dessous pour nous envoyer un message :</p>
-    <form action="https://formsubmit.co/info@yadelagadou.com" method="POST">
+    <form id="contact-form" action="https://formsubmit.co/info@yadelagadou.com" method="POST">
         <div class="form-group">
             <label for="name">Nom :</label>
             <input type="text" id="name" name="name" required>
@@ -76,6 +75,7 @@
         </div>
         <button type="submit">Envoyer</button>
     </form>
+    <div id="form-message" style="display: none;">Merci! Votre message a été envoyé.</div>
 </section>
 
     <footer>
