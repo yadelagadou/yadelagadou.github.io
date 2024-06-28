@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Empêcher la soumission par défaut du formulaire
 
-        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form)
+        emailjs.sendForm('service_4qj60a9', 'template_l3s4mge', form)
             .then(function(response) {
                 form.reset();
                 formMessage.style.display = 'block';
