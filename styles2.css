@@ -1,4 +1,321 @@
-/* Section de contact */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #FFCC00, #CC0000);
+    /* Remplacez #FFCC00 et #CC0000 par les couleurs que vous préférez */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    overflow-x: hidden; /* Empêche le débordement horizontal */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+    width: 100%;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    border: 2px solid #fff; /* Ajout d'une bordure blanche */
+    border-radius: 10px; /* Bordures arrondies */
+    margin-bottom: 10px; /* Espace en bas */
+}
+
+.hamburger-menu {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    border: 2px solid #fff; /* Ajout d'une bordure blanche */
+    border-radius: 10px; /* Bordures arrondies */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+/* Nouveau conteneur pour la barre de recherche */
+.search-container {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    margin-top: 80px; /* Ajustement pour la position sous la navbar */
+    margin-bottom: 10px; /* Espace en bas */
+    display: flex;
+    justify-content: center;
+    border: 2px solid #fff; /* Ajout d'une bordure blanche */
+    border-radius: 10px; /* Bordures arrondies */
+}
+
+.search-container input {
+    width: 100%;
+    max-width: 600px; /* Limite la largeur maximale */
+    padding: 10px;
+    border: 2px solid #ccc; /* Bordure */
+    border-radius: 4px; /* Bordures arrondies */
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+}
+
+.container {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    border: 2px solid #fff; /* Ajout d'une bordure blanche */
+    border-radius: 10px; /* Bordures arrondies */
+    margin-bottom: 10px; /* Espace en bas */
+}
+
+.video-list {
+    flex: 1;
+    min-width: 300px;
+    max-width: 100%; /* S'assure que la liste de vidéos n'excède pas la largeur disponible */
+    background-color: #fff;
+    border-radius: 10px; /* Bordures arrondies */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 400px;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    border: 2px solid #333; /* Ajout d'une bordure */
+}
+
+.video-item {
+    background-color: #f4f4f4;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 10px; /* Bordures arrondies */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #ccc; /* Ajout d'une bordure */
+}
+
+.video-item:hover {
+    background-color: #e4e4e4;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    border-color: #999; /* Change la couleur de la bordure au survol */
+}
+
+.video-player {
+    flex: 2;
+    min-width: 300px;
+    max-width: 100%; /* S'assure que le lecteur vidéo n'excède pas la largeur disponible */
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px; /* Bordures arrondies */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    border: 2px solid #333; /* Ajout d'une bordure */
+}
+
+.video-player iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px; /* Bordures arrondies pour l'iframe */
+}
+
+#exit-fullscreen {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10000;
+    border-radius: 4px; /* Bordures arrondies */
+}
+
+footer {
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
+    border: 2px solid #fff; /* Ajout d'une bordure blanche */
+    border-radius: 10px; /* Bordures arrondies */
+}
+
+@media (min-width: 1024px) {
+    .container {
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .video-list {
+        flex: 1;
+        max-height: 100%;
+        overflow-y: auto;
+    }
+
+    .video-player {
+        flex: 3;
+        max-height: 100%;
+    }
+
+    .video-player iframe {
+        height: 100%;
+    }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    .header {
+        justify-content: center;
+    }
+
+    .hamburger-menu {
+        position: absolute;
+        left: 10px;
+    }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar a {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #575757;
+    }
+
+    .search-container {
+        margin-top: 70px; /* Ajustement pour la position sous la navbar sur petits écrans */
+        margin-bottom: 10px; /* Espace en bas */
+        padding: 10px; /* Assure que le padding est inclus dans la largeur totale */
+        width: calc(100% - 20px); /* Ajustement pour petits écrans */
+    }
+
+    .video-player {
+        height: auto; /* Adjust height to auto for portrait mode */
+    }
+
+    .video-player iframe {
+        height: 250px; /* Specific height for iframe in portrait mode */
+    }
+
+    .video-list {
+        max-height: 300px;
+        max-width: 100%; /* S'assure que la liste de vidéos n'excède pas la largeur disponible */
+    }
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+    .container {
+        padding: 5px;
+        margin-top: 50px;
+    }
+
+    .navbar a {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .search-container {
+        margin-top: 60px; /* Ajustement pour la position sous la navbar sur petits écrans */
+        margin-bottom: 10px; /* Espace en bas */
+        padding: 10px; /* Assure que le padding est inclus dans la largeur totale */
+        width: calc(100% - 10px); /* Ajustement pour petits écrans */
+    }
+
+    .video-player iframe {
+        height: 220px;
+    }
+
+    .video-list {
+        max-height: 250px;
+        padding: 8px;
+        max-width: 100%; /* S'assure que la liste de vidéos n'excède pas la largeur disponible */
+    }
+
+    .video-item {
+        padding: 6px;
+        margin: 6px 0;
+    }
+
+    .search-container input {
+        padding: 6px;
+    }
+	
+	/* Section de contact */
 .contact-section {
     background-color: #fff;
     padding: 40px 20px;
@@ -59,4 +376,6 @@
 .contact-section button:hover {
     background-color: #FFCC00;
     color: #333;
+}
+
 }
