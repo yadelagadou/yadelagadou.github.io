@@ -126,3 +126,48 @@ function enterFullScreen(iframe) {
         iframe.msRequestFullscreen();
     }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    // Code existant...
+
+    // Charger les vidéos pour le zapping depuis zap.json
+    fetch('zap.json')
+        .then(response => response.json())
+        .then(videos => {
+            const zapResults = document.getElementById('zap-results');
+            videos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.classList.add('video-item');
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.innerHTML = `<h3>${video.title}</h3>`;
+                videoItem.addEventListener('click', function() {
+                    const iframe = document.getElementById('youtube-video');
+                    iframe.src = `https://www.youtube.com/embed/${video.id}`;
+                    enterFullScreen(iframe);
+                });
+                zapResults.appendChild(videoItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading zap videos:', error);
+        });
+
+    // Code existant...
+});
+
+function enterFullScreen(iframe) {
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
+    }
+}
+
+function exitFullScreen() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+}

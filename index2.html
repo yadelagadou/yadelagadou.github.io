@@ -40,13 +40,24 @@
         <h1 class="site-title">Yadelagadou TV</h1>
     </div>
 
-    <nav class="navbar">
-        <a href="#home">Accueil</a>
-        <a href="#videos">Vidéos</a>
-        <a href="#about">À propos</a>
-        <a href="#contact">Contact</a>
-        <a href="#normandie">Découvrir la Normandie</a>
-    </nav>
+<nav class="navbar">
+    <a href="#home">Accueil</a>
+    <a href="#zapping">Zapping</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+    <a href="#normandie">Découvrir la Normandie</a>
+</nav>
+<div class="container" id="zapping">
+    <div class="video-list">
+        <div id="zap-results"></div>
+    </div>
+    <div class="video-player">
+        <h2 id="site-title">YADELAGADOU TV La Chaine 100% Normande</h2>
+        <iframe id="youtube-video" src="https://www.youtube.com/embed/UXo6LRx0pHE" frameborder="0" allowfullscreen></iframe>
+        <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
+    </div>
+</div>
+
 
     <div class="search-container" id="home">
         <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
