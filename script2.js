@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             marqueeMessage.innerHTML = 'Bienvenue sur YADELAGADOU TV! 🌟 Profitez de nos vidéos!';
         });
 
-    function onYouTubeIframeAPIReady() {
+    window.onYouTubeIframeAPIReady = function() {
         player = new YT.Player('player', {
             videoId: videoIds[0], // Initialize with the first ID in the list
             playerVars: { 'autoplay': 1, 'controls': 1 },
@@ -63,14 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    navbarLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (link.getAttribute('href') === '#zaping') {
-                player.loadVideoById(videoIds[0]);
-                currentVideoIndex = 0;
-            }
-            navbar.classList.remove('active');
-        });
+    document.getElementById('zaping-link').addEventListener('click', function() {
+        player.loadVideoById(videoIds[0]);
+        currentVideoIndex = 0;
     });
 
     // Load videos from JSON file (old functionality, might not be needed now)
