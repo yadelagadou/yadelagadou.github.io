@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitFullscreenButton = document.getElementById('exit-fullscreen');
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
+    const navbar = document.querySelector('.navbar');
+    const hamburgerIcon = document.querySelector('.hamburger-icon');
+    const navbarLinks = document.querySelectorAll('.navbar a');
 
     // Load marquee message from a text file
     fetch('marquee.txt')
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Empêcher la soumission par défaut du formulaire
 
-        emailjs.sendForm('service_4qj60a9', 'template_l3s4mge', form)
+        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form)
             .then(function(response) {
                 form.reset();
                 formMessage.style.display = 'block';
@@ -69,6 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
                 formMessage.classList.add('error');
             });
+    });
+
+    hamburgerIcon.addEventListener('click', function() {
+        navbar.classList.toggle('active');
+    });
+
+    navbarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navbar.classList.remove('active');
+        });
     });
 });
 
