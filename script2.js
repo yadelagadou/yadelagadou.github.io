@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formMessage = document.getElementById('form-message');
     const navbar = document.querySelector('.navbar');
     const hamburgerIcon = document.querySelector('.hamburger-icon');
+    const navbarLinks = document.querySelectorAll('.navbar a');
 
     // Load marquee message from a text file
     fetch('marquee.txt')
@@ -75,6 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hamburgerIcon.addEventListener('click', function() {
         navbar.classList.toggle('active');
+    });
+
+    navbarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navbar.classList.remove('active');
+        });
     });
 });
 
