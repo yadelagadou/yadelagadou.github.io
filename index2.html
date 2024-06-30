@@ -7,7 +7,7 @@
     <meta name="description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires sur la Basse et Haute Normandie.">
     <meta name="keywords" content="Yadelagadou TV, vidéos humoristiques, Normandie, vidéos normandes, culture normande, divertissement, Basse Normandie, Haute Normandie, que faire en Normandie, bienvenue en Normandie">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://yadelagadou.com/">
+    <link rel="canonical" href="https://yadelagadou.github.io/">
     <link rel="stylesheet" href="styles2.css">
     <!-- Balises Open Graph pour les réseaux sociaux -->
     <meta property="og:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
@@ -32,7 +32,7 @@
 <body>
     <div class="header">
         <!-- Menu hamburger -->
-        <div class="hamburger-icon" onclick="toggleNavbar()">
+        <div class="hamburger-icon">
             <div></div>
             <div></div>
             <div></div>
@@ -89,11 +89,11 @@
         <p>&copy; 2024 Yadelagadou TV. Tous droits réservés.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script2.js"></script>
     <script>
         function toggleNavbar() {
             const navbar = document.querySelector('.navbar');
-            navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
+            navbar.classList.toggle('active');
         }
     </script>
 </body>
