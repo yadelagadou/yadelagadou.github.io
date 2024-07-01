@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const results = document.getElementById('search-results');
     const marqueeMessage = document.getElementById('marquee-message');
-    const videoPlayer = document.querySelector('.video-player');
+    const videoPlayerContainer = document.querySelector('.video-player');
+    const videoPlayerIframe = document.getElementById('youtube-video');
     const exitFullscreenButton = document.getElementById('exit-fullscreen');
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('player', {
+        player = new YT.Player('youtube-video', {
             videoId: videoIds[0],
             playerVars: { 'autoplay': 1, 'controls': 1 },
             events: {
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('zaping-link').addEventListener('click', function() {
         player.loadVideoById(videoIds[0]);
         currentVideoIndex = 0;
-        enterFullScreen(player.a);
+        enterFullScreen(videoPlayerContainer);
     });
 
     fetch('videos.json')
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 videoItem.innerHTML = `<h3>${video.title}</h3>`;
                 videoItem.addEventListener('click', function() {
                     player.loadVideoById(video.id);
-                    enterFullScreen(player.a);
+                    enterFullScreen(videoPlayerContainer);
                 });
 
                 results.appendChild(videoItem);
@@ -97,10 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('fullscreenchange', function() {
         if (document.fullscreenElement) {
-            videoPlayer.classList.add('full-screen-video');
+            videoPlayerContainer.classList.add('full-screen-video');
             exitFullscreenButton.style.display = 'block';
         } else {
-            videoPlayer.classList.remove('full-screen-video');
+            videoPlayerContainer.classList.remove('full-screen-video');
             exitFullscreenButton.style.display = 'none';
         }
     });
@@ -150,7 +151,7 @@ function searchVideos() {
                     videoItem.innerHTML = `<h3>${video.title}</h3>`;
                     videoItem.addEventListener('click', function() {
                         player.loadVideoById(video.id);
-                        enterFullScreen(player.a);
+                        enterFullScreen(videoPlayerContainer);
                     });
 
                     results.appendChild(videoItem);
