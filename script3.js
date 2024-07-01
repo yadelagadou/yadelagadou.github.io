@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const results = document.getElementById('search-results');
     const marqueeMessage = document.getElementById('marquee-message');
     const videoPlayerContainer = document.querySelector('.video-player');
-    const videoPlayerIframe = document.getElementById('youtube-video');
     const exitFullscreenButton = document.getElementById('exit-fullscreen');
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('youtube-video', {
+        player = new YT.Player('player', {
             videoId: videoIds[0],
             playerVars: { 'autoplay': 1, 'controls': 1 },
             events: {
