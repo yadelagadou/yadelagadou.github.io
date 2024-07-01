@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('android');
     }
 
+    // Configuration d'EmailJS
+    emailjs.init("DpXF9WJZjKx7woY-Q"); // Remplacez par votre identifiant utilisateur EmailJS
+
     let currentVideoIndex = 0;
     let videoIds = [];
     let player;
@@ -118,10 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Ajoutez l'écouteur d'événements pour le formulaire de contact
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form, 'DpXF9WJZjKx7woY-Q')
+        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form)
             .then(function(response) {
                 form.reset();
                 formMessage.style.display = 'block';
@@ -189,4 +193,13 @@ function enterFullScreen(element) {
 }
 
 function exitFullScreen() {
-    if (
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+    }
+}
