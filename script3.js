@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerIcon = document.querySelector('.hamburger-icon');
     const navbarLinks = document.querySelectorAll('.navbar a');
 
+    // Détecter si l'utilisateur est sur un appareil Android
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+        document.body.classList.add('android');
+    }
+
     let currentVideoIndex = 0;
     let videoIds = [];
     let player;
@@ -115,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form)
+        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form, 'DpXF9WJZjKx7woY-Q')
             .then(function(response) {
                 form.reset();
                 formMessage.style.display = 'block';
@@ -183,13 +189,4 @@ function enterFullScreen(element) {
 }
 
 function exitFullScreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { // Firefox
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { // IE/Edge
-        document.msExitFullscreen();
-    }
-}
+    if (
