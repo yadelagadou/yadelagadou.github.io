@@ -191,7 +191,7 @@ a {
 #exit-fullscreen {
     display: none;
     position: absolute;
-    top: 10px;
+    top: 30px;
     right: 10px;
     padding: 10px;
     background: #333;
