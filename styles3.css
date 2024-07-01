@@ -286,7 +286,8 @@ footer {
     }
 
     .video-player iframe {
-        height: 250px;
+        height: 100vh; /* Force fullscreen height */
+        width: 100vw; /* Force fullscreen width */
     }
 
     .video-list {
@@ -314,7 +315,8 @@ footer {
     }
 
     .video-player iframe {
-        height: 220px;
+        height: 100vh; /* Force fullscreen height */
+        width: 100vw; /* Force fullscreen width */
     }
 
     .video-list {
