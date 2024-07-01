@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             videoIds = data.videos.map(video => video.id);
             shuffleVideos();
-            onYouTubeIframeAPIReady();
+            loadYouTubeAPI();
         })
         .catch(error => {
             console.error('Error loading videos:', error);
@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error loading marquee message:', error);
             marqueeMessage.innerHTML = 'Bienvenue sur YADELAGADOU TV! 🌟 Profitez de nos vidéos!';
         });
+
+    function loadYouTubeAPI() {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
 
     window.onYouTubeIframeAPIReady = function() {
         player = new YT.Player('youtube-video', {
@@ -151,7 +158,7 @@ function searchVideos() {
                     videoItem.innerHTML = `<h3>${video.title}</h3>`;
                     videoItem.addEventListener('click', function() {
                         player.loadVideoById(video.id);
-                        enterFullScreen(videoPlayerContainer);
+                        enterFullScreen(document.querySelector('.video-player'));
                     });
 
                     results.appendChild(videoItem);
