@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const results = document.getElementById('search-results');
     const marqueeMessage = document.getElementById('marquee-message');
-    const videoPlayer = document.querySelector('.video-player');
+    const videoPlayerContainer = document.querySelector('.video-player');
     const exitFullscreenButton = document.getElementById('exit-fullscreen');
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
@@ -9,7 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerIcon = document.querySelector('.hamburger-icon');
     const navbarLinks = document.querySelectorAll('.navbar a');
 
-    // Load marquee message from a text file
+    // Détecter si l'utilisateur est sur un appareil Android
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+        document.body.classList.add('android');
+    }
+
+    // Configuration d'EmailJS
+    emailjs.init("DpXF9WJZjKx7woY-Q"); // Remplacez par votre identifiant utilisateur EmailJS
+
+    let currentVideoIndex = 0;
+    let videoIds = [];
+    let player;
+
+    fetch('zap.json')
+        .then(response => response.json())
+        .then(data => {
+            videoIds = data.videos.map(video => video.id);
+            shuffleVideos();
+            loadYouTubeAPI();
+        })
+        .catch(error => {
+            console.error('Error loading videos:', error);
+        });
+
     fetch('marquee.txt')
         .then(response => response.text())
         .then(data => {
@@ -20,7 +43,48 @@ document.addEventListener('DOMContentLoaded', () => {
             marqueeMessage.innerHTML = 'Bienvenue sur YADELAGADOU TV! 🌟 Profitez de nos vidéos!';
         });
 
-    // Load videos from JSON file
+    function loadYouTubeAPI() {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('player', {
+            videoId: videoIds[0],
+            playerVars: { 'autoplay': 1, 'controls': 1 },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            currentVideoIndex = (currentVideoIndex + 1) % videoIds.length;
+            player.loadVideoById(videoIds[currentVideoIndex]);
+        }
+    }
+
+    function shuffleVideos() {
+        for (let i = videoIds.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [videoIds[i], videoIds[j]] = [videoIds[j], videoIds[i]];
+        }
+    }
+
+    document.getElementById('zaping-link').addEventListener('click', function() {
+        player.loadVideoById(videoIds[0]);
+        currentVideoIndex = 0;
+        enterFullScreen(videoPlayerContainer);
+    });
+
     fetch('videos.json')
         .then(response => response.json())
         .then(videos => {
@@ -30,9 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 videoItem.setAttribute('data-video-id', video.id);
                 videoItem.innerHTML = `<h3>${video.title}</h3>`;
                 videoItem.addEventListener('click', function() {
-                    const iframe = document.getElementById('youtube-video');
-                    iframe.src = `https://www.youtube.com/embed/${video.id}`;
-                    enterFullScreen(iframe);
+                    player.loadVideoById(video.id);
+                    enterFullScreen(videoPlayerContainer);
                 });
 
                 results.appendChild(videoItem);
@@ -50,18 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('fullscreenchange', function() {
         if (document.fullscreenElement) {
-            videoPlayer.classList.add('full-screen-video');
+            videoPlayerContainer.classList.add('full-screen-video');
             exitFullscreenButton.style.display = 'block';
         } else {
-            videoPlayer.classList.remove('full-screen-video');
+            videoPlayerContainer.classList.remove('full-screen-video');
             exitFullscreenButton.style.display = 'none';
         }
     });
 
+    // Ajoutez l'écouteur d'événements pour le formulaire de contact
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+        event.preventDefault();
 
-        emailjs.sendForm('service_0fe252g', 'template_16kaikr', form)
+        emailjs.sendForm('service_4qj60a9', 'template_l3s4mge', form)
             .then(function(response) {
                 form.reset();
                 formMessage.style.display = 'block';
@@ -102,9 +166,8 @@ function searchVideos() {
                     videoItem.setAttribute('data-video-id', video.id);
                     videoItem.innerHTML = `<h3>${video.title}</h3>`;
                     videoItem.addEventListener('click', function() {
-                        const iframe = document.getElementById('youtube-video');
-                        iframe.src = `https://www.youtube.com/embed/${video.id}`;
-                        enterFullScreen(iframe);
+                        player.loadVideoById(video.id);
+                        enterFullScreen(document.querySelector('.video-player'));
                     });
 
                     results.appendChild(videoItem);
@@ -115,14 +178,28 @@ function searchVideos() {
         });
 }
 
-function enterFullScreen(iframe) {
-    if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-    } else if (iframe.mozRequestFullScreen) { // Firefox
-        iframe.mozRequestFullScreen();
-    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari et Opera
-        iframe.webkitRequestFullscreen();
-    } else if (iframe.msRequestFullscreen) { // IE/Edge
-        iframe.msRequestFullscreen();
+function enterFullScreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+    } else if (element.webkitEnterFullscreen) { // iOS Safari
+        element.webkitEnterFullscreen();
+    }
+}
+
+function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
     }
 }

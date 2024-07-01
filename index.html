@@ -9,14 +9,12 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yadelagadou.github.io/">
     <link rel="stylesheet" href="styles.css">
-    <!-- Balises Open Graph pour les réseaux sociaux -->
     <meta property="og:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
     <meta property="og:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
     <meta property="og:image" content="https://yadelagadou.com/images/thumbnail.jpg">
     <meta property="og:url" content="https://yadelagadou.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Yadelagadou TV">
-    <!-- Balises Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
     <meta name="twitter:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
@@ -31,7 +29,6 @@
 </head>
 <body>
     <div class="header">
-        <!-- Menu hamburger -->
         <div class="hamburger-icon">
             <div></div>
             <div></div>
@@ -42,7 +39,7 @@
 
     <nav class="navbar">
         <a href="#home">Accueil</a>
-        <a href="#videos">Vidéos</a>
+        <a href="#zaping" id="zaping-link">Zaping</a>
         <a href="#about">À propos</a>
         <a href="#contact">Contact</a>
         <a href="#normandie">Découvrir la Normandie</a>
@@ -56,14 +53,13 @@
         <div class="video-list">
             <div id="search-results"></div>
         </div>
-        <div class="video-player">
-            <h2 id="site-title">YADELAGADOU TV La Chaine 100% Normande</h2>
-            <iframe id="youtube-video" src="https://www.youtube.com/embed/UXo6LRx0pHE" frameborder="0" allowfullscreen></iframe>
+        <div class="video-player" id="fullscreen-player">
+            <h2 id="site-title">La Chaine 100% Normande</h2>
+            <div id="player"></div>
             <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
         </div>
     </div>
 
-    <!-- Section Contact -->
     <section id="contact" class="contact-section">
         <h2>Contactez-nous</h2>
         <p>Nous serions ravis de vous entendre. Utilisez le formulaire ci-dessous pour nous envoyer un message :</p>
@@ -90,5 +86,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
