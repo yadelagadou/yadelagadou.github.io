@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerIcon = document.querySelector('.hamburger-icon');
     const navbarLinks = document.querySelectorAll('.navbar a');
 
+    // Détecter si l'utilisateur est sur un appareil Android
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+        document.body.classList.add('android');
+    }
+
     let currentVideoIndex = 0;
     let videoIds = [];
     let player;

@@ -335,6 +335,15 @@ footer {
     }
 }
 
+/* Styles spécifiques pour Android */
+.android .navbar {
+    display: none; /* Cacher le menu normal sur Android */
+}
+
+.android .hamburger-icon {
+    display: flex; /* Afficher le menu burger sur Android */
+}
+
 /* Section de contact */
 .contact-section {
     background-color: #fff;
