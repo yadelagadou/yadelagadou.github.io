@@ -177,7 +177,7 @@ function enterFullScreen(element) {
         element.webkitRequestFullscreen();
     } else if (element.msRequestFullscreen) { // IE/Edge
         element.msRequestFullscreen();
-    } else if (element.webkitEnterFullscreen) { // Safari for iPhone
+    } else if (element.webkitEnterFullscreen) { // iOS Safari
         element.webkitEnterFullscreen();
     }
 }
