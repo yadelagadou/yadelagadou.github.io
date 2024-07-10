@@ -42,8 +42,7 @@ a {
 }
 
 .hamburger-icon {
-    display: flex;
-    flex-direction: column;
+    display: none; /* Caché par défaut */
     cursor: pointer;
 }
 
@@ -60,7 +59,30 @@ a {
     text-align: center;
 }
 
-.navbar {
+/* Menu classique */
+.navbar.classic-menu {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+}
+
+.navbar.classic-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+
+.navbar.classic-menu a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+/* Menu burger */
+.navbar.burger-menu {
     display: none;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.9);
@@ -74,18 +96,18 @@ a {
     z-index: 999;
 }
 
-.navbar.active {
+.navbar.burger-menu.active {
     display: flex;
 }
 
-.navbar a {
+.navbar.burger-menu a {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
     font-weight: 700;
 }
 
-.navbar a:hover {
+.navbar.burger-menu a:hover {
     background-color: #575757;
     border-radius: 4px;
 }
@@ -239,6 +261,18 @@ footer {
     .video-player iframe {
         height: 100%;
     }
+
+    .hamburger-icon {
+        display: none;
+    }
+
+    .navbar.classic-menu {
+        display: flex;
+    }
+
+    .navbar.burger-menu {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) and (orientation: portrait) {
@@ -246,29 +280,38 @@ footer {
         justify-content: center;
     }
 
-    .hamburger-menu {
-        position: absolute;
-        left: 10px;
+    .hamburger-icon {
+        display: flex; /* Affiché sur les petits écrans */
+        flex-direction: column;
     }
 
-    .navbar {
+    .hamburger-icon div {
+        background-color: white;
+    }
+
+    .navbar.classic-menu {
         display: none;
+    }
+
+    .navbar.burger-menu {
+        display: flex;
         flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.9);
         position: fixed;
-        top: 0;
-        left: 0;
+        top: 50px;
+        right: 0;
+        background-color: #333;
         width: 100%;
         height: 100%;
         justify-content: center;
         align-items: center;
+        display: none; /* Caché par défaut, sera affiché quand le burger est cliqué */
     }
 
-    .navbar.active {
+    .navbar.burger-menu.active {
         display: flex;
     }
 
-    .navbar a {
+    .navbar.burger-menu a {
         text-align: center;
         padding: 10px;
         border-top: 1px solid #575757;
@@ -302,7 +345,7 @@ footer {
         margin-top: 50px;
     }
 
-    .navbar a {
+    .navbar.burger-menu a {
         padding: 8px;
         font-size: 14px;
     }

@@ -29,7 +29,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="hamburger-icon">
+        <div class="hamburger-icon" id="hamburger-icon">
             <div></div>
             <div></div>
             <div></div>
@@ -37,9 +37,19 @@
         <h1 class="site-title">Yadelagadou TV</h1>
     </div>
 
-    <nav class="navbar">
+    <!-- Menu classique -->
+    <nav class="navbar classic-menu">
         <a href="#home">Accueil</a>
         <a href="#zaping" id="zaping-link">Zaping</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+        <a href="#normandie">Découvrir la Normandie</a>
+    </nav>
+
+    <!-- Menu burger -->
+    <nav class="navbar burger-menu" id="burger-menu">
+        <a href="#home">Accueil</a>
+        <a href="#zaping" id="zaping-link-mobile">Zaping</a>
         <a href="#about">À propos</a>
         <a href="#contact">Contact</a>
         <a href="#normandie">Découvrir la Normandie</a>
@@ -59,6 +69,8 @@
             <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
         </div>
     </div>
+
+    <div id="random-video-player"></div>
 
     <section id="contact" class="contact-section">
         <h2>Contactez-nous</h2>

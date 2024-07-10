@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitFullscreenButton = document.getElementById('exit-fullscreen');
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
-    const navbar = document.querySelector('.navbar');
-    const hamburgerIcon = document.querySelector('.hamburger-icon');
-    const navbarLinks = document.querySelectorAll('.navbar a');
+    const navbar = document.querySelector('.navbar.burger-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const navbarLinks = document.querySelectorAll('.burger-menu a');
+    const randomVideoPlayer = document.getElementById('random-video-player');
 
     // Détecter si l'utilisateur est sur un appareil Android
     const isAndroid = /Android/i.test(navigator.userAgent);
@@ -22,11 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let videoIds = [];
     let player;
 
+    // Charger les vidéos de zap.json
     fetch('zap.json')
         .then(response => response.json())
         .then(data => {
             videoIds = data.videos.map(video => video.id);
             shuffleVideos();
+            loadRandomVideo();
             loadYouTubeAPI();
         })
         .catch(error => {
@@ -79,10 +82,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function loadRandomVideo() {
+        const randomIndex = Math.floor(Math.random() * videoIds.length);
+        const randomVideo = videoIds[randomIndex];
+        randomVideoPlayer.innerHTML = `
+            <h2>Vidéo aléatoire</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${randomVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+    }
+
     document.getElementById('zaping-link').addEventListener('click', function() {
         player.loadVideoById(videoIds[0]);
         currentVideoIndex = 0;
         enterFullScreen(videoPlayerContainer);
+    });
+
+    document.getElementById('zaping-link-mobile').addEventListener('click', function() {
+        player.loadVideoById(videoIds[0]);
+        currentVideoIndex = 0;
+        enterFullScreen(videoPlayerContainer);
+        navbar.classList.remove('active'); // Ferme le menu burger après avoir cliqué sur un lien
     });
 
     fetch('videos.json')
