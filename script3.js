@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('player', {
+        player = new YT.Player('random-iframe', {
             videoId: videoIds[0],
             playerVars: { 'autoplay': 1, 'controls': 1 },
             events: {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (randomVideoPlayer) {
             randomVideoPlayer.innerHTML = `
                 <h2>Vidéo aléatoire</h2>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/${randomVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="random-iframe" width="560" height="315" src="https://www.youtube.com/embed/${randomVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             `;
         }
     }
