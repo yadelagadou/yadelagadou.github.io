@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
     const navbar = document.querySelector('.navbar.burger-menu');
-    const hamburgerIcon = document.querySelector('.hamburger-icon');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
     const navbarLinks = document.querySelectorAll('.burger-menu a');
     const randomVideoPlayer = document.getElementById('random-video-player');
 
@@ -95,6 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
         player.loadVideoById(videoIds[0]);
         currentVideoIndex = 0;
         enterFullScreen(videoPlayerContainer);
+    });
+
+    document.getElementById('zaping-link-mobile').addEventListener('click', function() {
+        player.loadVideoById(videoIds[0]);
+        currentVideoIndex = 0;
+        enterFullScreen(videoPlayerContainer);
+        navbar.classList.remove('active'); // Ferme le menu burger après avoir cliqué sur un lien
     });
 
     fetch('videos.json')
