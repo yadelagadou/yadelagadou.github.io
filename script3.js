@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('random-iframe', {
+        player = new YT.Player('player', {
             videoId: videoIds[0],
             playerVars: { 'autoplay': 1, 'controls': 1 },
             events: {
