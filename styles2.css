@@ -387,6 +387,8 @@ footer {
     max-width: 800px;
     margin: 20px auto;
     border: 2px solid #333;
+    z-index: 1; /* Ajouté pour s'assurer que le contact est au-dessus des autres éléments */
+    position: relative;
 }
 
 .contact-section h2 {
