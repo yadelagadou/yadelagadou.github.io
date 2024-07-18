@@ -152,9 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 formMessage.style.display = 'block';
                 formMessage.textContent = 'Merci! Votre message a été envoyé.';
                 formMessage.classList.remove('error');
+                formMessage.classList.add('success');
             }, function(error) {
                 formMessage.style.display = 'block';
                 formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
+                formMessage.classList.remove('success');
                 formMessage.classList.add('error');
             });
     });

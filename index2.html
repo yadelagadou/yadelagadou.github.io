@@ -17,9 +17,8 @@
         .navbar { display: flex; }
         .navbar a { color: #fff; padding: 10px; text-decoration: none; }
         .navbar a:hover { background: #575757; }
-        /* Ajoutez d'autres styles CSS critiques ici */
     </style>
-    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="styles2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
 
     <!-- Meta tags pour les réseaux sociaux -->
@@ -37,13 +36,13 @@
 
     <!-- Chargement différé des scripts non essentiels -->
     <script defer src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script defer src="script.js"></script>
+    <script defer src="script2.js"></script>
 
     <!-- Chargement asynchrone des scripts YouTube API -->
     <script async src="https://www.youtube.com/iframe_api"></script>
     <script>
         (function(){
-            emailjs.init("DpXF9WJZjKx7woY-Q"); // Remplacez par votre user_id
+            emailjs.init("DpXF9WJZjKx7woY-Q"); // Remplacez par votre identifiant utilisateur EmailJS
         })();
     </script>
 </head>
@@ -110,8 +109,9 @@
             </div>
             <button type="submit">Envoyer</button>
         </form>
-        <div id="form-message" style="display: none;">Merci! Votre message a été envoyé.</div>
+        <div id="form-message" style="display: none;"></div>
     </section>
+
     <section id="partenaires">
         <h2>Partenaires</h2>
         <!-- Lien ajouté ici -->
