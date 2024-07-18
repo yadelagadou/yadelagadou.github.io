@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CYT3GE8XC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_TRACKING_ID');
+    </script>
+    <!-- End Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-NRCT5F94');</script>
+    <!-- End Google Tag Manager -->
+    <meta name="p:domain_verify" content="439264fbd6f66a1f7d585b927892b29f"/>
     <meta name="description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires sur la Basse et Haute Normandie.">
     <meta name="keywords" content="normandie, humour normand, blague normande, en normandie, normandie tourisme, videos normandie, sortir en normandie, art de la rue, bienvenue en normandie, yadelagadou, yadelagadou TV, blagues, humoristes, images, ridiculous, videos">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yadelagadou.github.io/">
-    <link rel="stylesheet" href="styles2.min.css">
+    <link rel="stylesheet" href="styles2.css">
     <meta property="og:title" content="Yadelagadou TV - Vidéos Humoristiques et Culturelles sur la Normandie">
     <meta property="og:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
     <meta property="og:image" content="https://yadelagadou.com/images/thumbnail.jpg">
@@ -20,19 +33,15 @@
     <meta name="twitter:description" content="Découvrez Yadelagadou TV, la chaîne YouTube 100% Normande avec des vidéos humoristiques et culturelles sur la Normandie. Explorez notre sélection de vidéos populaires et engageantes.">
     <meta name="twitter:image" content="https://yadelagadou.com/images/thumbnail.jpg">
     <meta name="twitter:site" content="@VotreCompteTwitter">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CYT3GE8XC"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'YOUR_TRACKING_ID');
-    </script>
-    <script async src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
         (function(){ emailjs.init("DpXF9WJZjKx7woY-Q"); })();
     </script>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRCT5F94" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="header">
         <div class="hamburger-icon" id="hamburger-icon">
             <div></div>
@@ -41,6 +50,8 @@
         </div>
         <h1 class="site-title">Yadelagadou TV</h1>
     </div>
+
+    <!-- Menu classique -->
     <nav class="navbar classic-menu">
         <a href="#home">Accueil</a>
         <a href="#zaping" id="zaping-link">Zaping</a>
@@ -48,6 +59,8 @@
         <a href="#contact">Contact</a>
         <a href="#partenaires">Partenaires</a>
     </nav>
+
+    <!-- Menu burger -->
     <nav class="navbar burger-menu" id="burger-menu">
         <a href="#home">Accueil</a>
         <a href="#zaping" id="zaping-link-mobile">Zaping</a>
@@ -55,9 +68,11 @@
         <a href="#contact">Contact</a>
         <a href="#partenaires">Partenaires</a>
     </nav>
+
     <div class="search-container" id="home">
         <input type="text" id="search-query" placeholder="Rechercher une vidéo" oninput="searchVideos()">
     </div>
+
     <div class="container">
         <div class="video-list">
             <div id="search-results"></div>
@@ -68,7 +83,9 @@
             <button id="exit-fullscreen" onclick="exitFullScreen()">Sortir du plein écran</button>
         </div>
     </div>
+
     <div id="random-video-player"></div>
+
     <section id="contact" class="contact-section">
         <h2>Contactez-nous</h2>
         <p>Nous serions ravis de vous entendre. Utilisez le formulaire ci-dessous pour nous envoyer un message :</p>
@@ -93,10 +110,12 @@
         <h2>Partenaires</h2>
         <a href="http://www.annuaire-web-france.com/vote-annuaire-web-france.php?id_site_vote=99953" target="_blank"><img src="http://www.annuaire-web-france.com/images/logo-annuaire-web-france.gif" width="120" height="35" border="0" alt="Annuaire Web France"></a><noscript><a href="http://www.annuaire-web-france.com/annuaire-Videos-humour.php">Annuaire Vidéos humour</a> <a href="http://www.annuaire-web-france.com">Annuaire Web</a></noscript>
     </section>
+
     <footer>
         <p>&copy; 2024 Yadelagadou TV. Tous droits réservés.</p>
     </footer>
-    <script async src="script2.min.js"></script>
-    <script async src="https://www.youtube.com/iframe_api"></script>
+
+    <script src="script2.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>

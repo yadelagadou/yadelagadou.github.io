@@ -1,1 +1,220 @@
-document.addEventListener('DOMContentLoaded',()=>{const e=document.getElementById('search-results'),t=document.getElementById('marquee-message'),n=document.querySelector('.video-player'),o=document.getElementById('exit-fullscreen'),i=document.getElementById('contact-form'),a=document.getElementById('form-message'),r=document.querySelector('.navbar.burger-menu'),s=document.getElementById('hamburger-icon'),c=document.querySelectorAll('.burger-menu a'),d=document.getElementById('random-video-player'),l=/Android/i.test(navigator.userAgent);l&&document.body.classList.add('android'),emailjs.init('DpXF9WJZjKx7woY-Q');let u=0,m=[];fetch('zap.json').then(e=>e.json()).then(e=>{m=e.videos.map(e=>e.id),p(),v(),f()}).catch(e=>{console.error('Error loading videos:',e)}),fetch('marquee.txt').then(e=>e.text()).then(e=>{t.innerHTML=e}).catch(e=>{console.error('Error loading marquee message:',e),t.innerHTML='Bienvenue sur YADELAGADOU TV! 🌟 Profitez de nos vidéos!'});let g;function f(){const e=document.createElement('script');e.src='https://www.youtube.com/iframe_api',document.getElementsByTagName('script')[0].parentNode.insertBefore(e,document.getElementsByTagName('script')[0])}function p(){for(let e=m.length-1;e>0;e--){const t=Math.floor(Math.random()*(e+1));[m[e],m[t]]=[m[t],m[e]]}}function v(){const e=Math.floor(Math.random()*m.length),t=m[e];d.innerHTML=`<h2>Vidéo aléatoire</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/${t}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`}window.onYouTubeIframeAPIReady=function(){g=new YT.Player('player',{videoId:m[0],playerVars:{autoplay:1,controls:1},events:{onReady:e=>{e.target.playVideo()},onStateChange:e=>{e.data==YT.PlayerState.ENDED&&(u=(u+1)%m.length,g.loadVideoById(m[u]))}}})},document.getElementById('zaping-link').addEventListener('click',function(){g.loadVideoById(m[0]),u=0,h(n)}),document.getElementById('zaping-link-mobile').addEventListener('click',function(){g.loadVideoById(m[0]),u=0,h(n),r.classList.remove('active')}),fetch('videos.json').then(t=>t.json()).then(t=>{t.forEach(t=>{const n=document.createElement('div');n.classList.add('video-item'),n.setAttribute('data-video-id',t.id),n.innerHTML=`<h3>${t.title}</h3>`,n.addEventListener('click',function(){g.loadVideoById(t.id),h(n)}),e.appendChild(n)})}).catch(e=>{console.error('Error loading videos:',e)}),o.addEventListener('click',function(){document.fullscreenElement&&document.exitFullscreen()}),document.addEventListener('fullscreenchange',function(){document.fullscreenElement?(n.classList.add('full-screen-video'),o.style.display='block'):(n.classList.remove('full-screen-video'),o.style.display='none')}),i.addEventListener('submit',function(e){e.preventDefault(),emailjs.sendForm('service_4qj60a9','template_l3s4mge',i).then(function(e){i.reset(),a.style.display='block',a.textContent='Merci! Votre message a été envoyé.',a.classList.remove('error')},function(e){a.style.display='block',a.textContent='Erreur! Votre message n\'a pas pu être envoyé.',a.classList.add('error')})}),s.addEventListener('click',function(){r.classList.toggle('active')}),c.forEach(e=>{e.addEventListener('click',function(){r.classList.remove('active')})})});function searchVideos(){const e=document.getElementById('search-query').value.toLowerCase();fetch('videos.json').then(t=>t.json()).then(t=>{const n=document.getElementById('search-results');n.innerHTML='',t.filter(t=>t.title.toLowerCase().includes(e)).forEach(e=>{const t=document.createElement('div');t.classList.add('video-item'),t.setAttribute('data-video-id',e.id),t.innerHTML=`<h3>${e.title}</h3>`,t.addEventListener('click',function(){g.loadVideoById(e.id),h(document.querySelector('.video-player'))}),n.appendChild(t)})}).catch(e=>{console.error('Error searching videos:',e)})}function h(e){e.requestFullscreen?e.requestFullscreen():e.mozRequestFullScreen?e.mozRequestFullScreen():e.webkitRequestFullscreen?e.webkitRequestFullscreen():e.msRequestFullscreen?e.msRequestFullscreen():e.webkitEnterFullscreen&&e.webkitEnterFullscreen()}function exitFullScreen(){document.exitFullscreen?document.exitFullscreen():document.mozCancelFullScreen?document.mozCancelFullScreen():document.webkitExitFullscreen?document.webkitExitFullscreen():document.msExitFullscreen&&document.msExitFullscreen()}
+document.addEventListener('DOMContentLoaded', () => {
+    const results = document.getElementById('search-results');
+    const marqueeMessage = document.getElementById('marquee-message');
+    const videoPlayerContainer = document.querySelector('.video-player');
+    const exitFullscreenButton = document.getElementById('exit-fullscreen');
+    const form = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    const navbar = document.querySelector('.navbar.burger-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const navbarLinks = document.querySelectorAll('.burger-menu a');
+    const randomVideoPlayer = document.getElementById('random-video-player');
+
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+        document.body.classList.add('android');
+    }
+
+    emailjs.init("DpXF9WJZjKx7woY-Q");
+
+    let currentVideoIndex = 0;
+    let videoIds = [];
+    let player;
+
+    fetch('zap.json')
+        .then(response => response.json())
+        .then(data => {
+            videoIds = data.videos.map(video => video.id);
+            shuffleVideos();
+            loadRandomVideo();
+            loadYouTubeAPI();
+        })
+        .catch(error => {
+            console.error('Error loading videos:', error);
+        });
+
+    fetch('marquee.txt')
+        .then(response => response.text())
+        .then(data => {
+            marqueeMessage.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading marquee message:', error);
+            marqueeMessage.innerHTML = 'Bienvenue sur YADELAGADOU TV! 🌟 Profitez de nos vidéos!';
+        });
+
+    function loadYouTubeAPI() {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('player', {
+            videoId: videoIds[0],
+            playerVars: { 'autoplay': 1, 'controls': 1 },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            currentVideoIndex = (currentVideoIndex + 1) % videoIds.length;
+            player.loadVideoById(videoIds[currentVideoIndex]);
+        }
+    }
+
+    function shuffleVideos() {
+        for (let i = videoIds.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [videoIds[i], videoIds[j]] = [videoIds[j], videoIds[i]];
+        }
+    }
+
+    function loadRandomVideo() {
+        const randomIndex = Math.floor(Math.random() * videoIds.length);
+        const randomVideo = videoIds[randomIndex];
+        randomVideoPlayer.innerHTML = `
+            <h2>Vidéo aléatoire</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${randomVideo}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+    }
+
+    document.getElementById('zaping-link').addEventListener('click', function() {
+        player.loadVideoById(videoIds[0]);
+        currentVideoIndex = 0;
+        enterFullScreen(videoPlayerContainer);
+    });
+
+    document.getElementById('zaping-link-mobile').addEventListener('click', function() {
+        player.loadVideoById(videoIds[0]);
+        currentVideoIndex = 0;
+        enterFullScreen(videoPlayerContainer);
+        navbar.classList.remove('active');
+    });
+
+    fetch('videos.json')
+        .then(response => response.json())
+        .then(videos => {
+            videos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.classList.add('video-item');
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.innerHTML = `<h3>${video.title}</h3>`;
+                videoItem.addEventListener('click', function() {
+                    player.loadVideoById(video.id);
+                    enterFullScreen(videoPlayerContainer);
+                });
+
+                results.appendChild(videoItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading videos:', error);
+        });
+
+    exitFullscreenButton.addEventListener('click', function() {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
+    });
+
+    document.addEventListener('fullscreenchange', function() {
+        if (document.fullscreenElement) {
+            videoPlayerContainer.classList.add('full-screen-video');
+            exitFullscreenButton.style.display = 'block';
+        } else {
+            videoPlayerContainer.classList.remove('full-screen-video');
+            exitFullscreenButton.style.display = 'none';
+        }
+    });
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        emailjs.sendForm('service_4qj60a9', 'template_l3s4mge', form)
+            .then(function(response) {
+                form.reset();
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Merci! Votre message a été envoyé.';
+                formMessage.classList.remove('error');
+            }, function(error) {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Erreur! Votre message n\'a pas pu être envoyé.';
+                formMessage.classList.add('error');
+            });
+    });
+
+    hamburgerIcon.addEventListener('click', function() {
+        navbar.classList.toggle('active');
+    });
+
+    navbarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navbar.classList.remove('active');
+        });
+    });
+});
+
+function searchVideos() {
+    const query = document.getElementById('search-query').value.toLowerCase();
+
+    fetch('videos.json')
+        .then(response => response.json())
+        .then(videos => {
+            const results = document.getElementById('search-results');
+            results.innerHTML = '';
+
+            videos
+                .filter(video => video.title.toLowerCase().includes(query))
+                .forEach(video => {
+                    const videoItem = document.createElement('div');
+                    videoItem.classList.add('video-item');
+                    videoItem.setAttribute('data-video-id', video.id);
+                    videoItem.innerHTML = `<h3>${video.title}</h3>`;
+                    videoItem.addEventListener('click', function() {
+                        player.loadVideoById(video.id);
+                        enterFullScreen(document.querySelector('.video-player'));
+                    });
+
+                    results.appendChild(videoItem);
+                });
+        })
+        .catch(error => {
+            console.error('Error searching videos:', error);
+        });
+}
+
+function enterFullScreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+    } else if (element.webkitEnterFullscreen) { // iOS Safari
+        element.webkitEnterFullscreen();
+    }
+}
+
+function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+    }
+}
