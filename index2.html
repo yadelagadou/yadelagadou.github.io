@@ -35,10 +35,12 @@
     <meta name="twitter:image" content="https://yadelagadou.com/images/thumbnail.jpg">
     <meta name="twitter:site" content="@VotreCompteTwitter">
 
-    <!-- Chargement différé des scripts -->
+    <!-- Chargement différé des scripts non essentiels -->
     <script defer src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script defer src="script.js"></script>
-    <script defer src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- Chargement asynchrone des scripts YouTube API -->
+    <script async src="https://www.youtube.com/iframe_api"></script>
     <script>
         (function(){
             emailjs.init("DpXF9WJZjKx7woY-Q"); // Remplacez par votre user_id
@@ -122,6 +124,6 @@
     </footer>
 
     <script defer src="script.js"></script>
-    <script defer src="https://www.youtube.com/iframe_api"></script>
+    <script async src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
