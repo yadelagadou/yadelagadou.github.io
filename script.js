@@ -10,20 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbarLinks = document.querySelectorAll('.burger-menu a');
     const randomVideoPlayer = document.getElementById('random-video-player');
 
-    // Détecter si l'utilisateur est sur un appareil Android
     const isAndroid = /Android/i.test(navigator.userAgent);
     if (isAndroid) {
         document.body.classList.add('android');
     }
 
-    // Configuration d'EmailJS
-    emailjs.init("DpXF9WJZjKx7woY-Q"); // Remplacez par votre identifiant utilisateur EmailJS
+    emailjs.init("DpXF9WJZjKx7woY-Q");
 
     let currentVideoIndex = 0;
     let videoIds = [];
     let player;
 
-    // Charger les vidéos de zap.json
     fetch('zap.json')
         .then(response => response.json())
         .then(data => {
@@ -101,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         player.loadVideoById(videoIds[0]);
         currentVideoIndex = 0;
         enterFullScreen(videoPlayerContainer);
-        navbar.classList.remove('active'); // Ferme le menu burger après avoir cliqué sur un lien
+        navbar.classList.remove('active');
     });
 
     fetch('videos.json')
@@ -140,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Ajoutez l'écouteur d'événements pour le formulaire de contact
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
