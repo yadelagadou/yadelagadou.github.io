@@ -77,6 +77,11 @@ a {
     margin: 4px 0;
 }
 
+.header-image {
+    height: 80px; /* Ajustez la taille de l'image selon vos besoins */
+    margin-right: 20px; /* Espacement entre l'image et le titre */
+}
+
 /* Styles pour le pop-up */
 .popup {
     display: none;
