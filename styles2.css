@@ -6,22 +6,25 @@ html, body {
     background: linear-gradient(to bottom right, #FFCC00, #CC0000);
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    overflow-x: hidden;
-    position: relative; /* Assure que les éléments enfants peuvent être positionnés relativement */
-}
-
+/* Appliquer la police Blockland à l'ensemble du site */
 @font-face {
     font-family: 'Blockland';
     src: url('Blockland-vnRG7.ttf') format('truetype');
 }
 
-h1, h2 {
+body, h1, h2, h3, h4, h5, h6, p, a, div, span, input, textarea, button {
     font-family: 'Blockland', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    color: #333;
+    overflow-x: hidden;
+    position: relative; /* Assure que les éléments enfants peuvent être positionnés relativement */
+}
+
+h1, h2 {
     margin: 0;
 }
 
