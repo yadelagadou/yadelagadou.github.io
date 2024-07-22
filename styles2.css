@@ -458,11 +458,14 @@ footer {
     margin: 20px auto;
     border: 2px solid #333;
     z-index: 1; /* S'assure que le contact-section reste au-dessus d'autres éléments */
+    text-align: center; /* Centrer le contenu */
+    font-size: 1.25em; /* Augmenter la taille de la police */
 }
 
 .contact-section h2 {
     text-align: center;
     color: #CC0000;
+    font-size: 2em; /* Augmenter la taille de la police pour le titre */
 }
 
 .contact-section p {
@@ -504,7 +507,7 @@ footer {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.25em; /* Augmenter la taille de la police */
 }
 
 .contact-section button:hover {
@@ -520,6 +523,7 @@ footer {
     border: 1px solid #d6e9c6;
     border-radius: 5px;
     display: none;
+    font-size: 1.25em; /* Augmenter la taille de la police */
 }
 
 #form-message.error {
