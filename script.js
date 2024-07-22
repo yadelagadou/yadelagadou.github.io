@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Récupération des éléments du DOM
+    const popup = document.getElementById('youtube-popup');
+    const closePopupButton = document.getElementById('close-popup');
+
+    // Affiche le pop-up après un délai de 3 secondes
+    setTimeout(() => {
+        popup.style.display = 'flex';
+    }, 3000);
+
+    // Ferme le pop-up lorsque l'utilisateur clique sur le bouton de fermeture
+    closePopupButton.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    // Ferme le pop-up si l'utilisateur clique en dehors du contenu du pop-up
+    window.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
     const results = document.getElementById('search-results');
     const marqueeMessage = document.getElementById('marquee-message');
     const videoPlayerContainer = document.querySelector('.video-player');
