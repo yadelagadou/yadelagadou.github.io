@@ -27,6 +27,11 @@ body {
 h1, h2 {
     margin: 0;
 }
+h3 {
+    font-family: 'Blockland', sans-serif;
+    font-size: 1.75em; /* Augmentez cette valeur pour rendre le texte plus grand */
+    margin: 0;
+}
 
 a {
     color: #333;
