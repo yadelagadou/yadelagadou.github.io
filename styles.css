@@ -147,7 +147,7 @@ a {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .navbar.classic-menu a:hover {
@@ -423,7 +423,7 @@ footer {
 
     .navbar.burger-menu a {
         padding: 8px;
-        font-size: 14px;
+        font-size: 28px;
     }
 
     .search-container {
