@@ -89,17 +89,24 @@ document.addEventListener('DOMContentLoaded', () => {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
 
-  window.onYouTubeIframeAPIReady = function () {
-    // player initialisé ici (async)
-    player = new YT.Player('player', {
-      videoId: videoIds[0],
-      playerVars: { 'autoplay': 1, 'controls': 1 },
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  };
+window.onYouTubeIframeAPIReady = function () {
+    // attendre que zap.json soit chargé
+    const waitForVideos = setInterval(() => {
+        if (Array.isArray(videoIds) && videoIds.length > 0) {
+            clearInterval(waitForVideos);
+
+            player = new YT.Player('player', {
+                videoId: videoIds[0],
+                playerVars: { autoplay: 1, controls: 1 },
+                events: {
+                    onReady: onPlayerReady,
+                    onStateChange: onPlayerStateChange
+                }
+            });
+        }
+    }, 100);
+};
+
 
   function onPlayerReady(event) {
     playerReady = true;
@@ -265,3 +272,4 @@ function exitFullScreen() {
     document.msExitFullscreen();
   }
 }
+
